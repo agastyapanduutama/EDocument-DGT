@@ -17,7 +17,7 @@ class dok extends CI_Controller {
 		$userlogged = $this->session->userdata('userlogged');
 		$userid = $this->session->userdata("userid");
 
-		var_dump($this->input->post());
+		// var_dump($this->input->post());
 	
 		if($userlogged){
 			$em = $this->em;

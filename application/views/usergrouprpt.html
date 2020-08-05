@@ -1,0 +1,75 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate();
+});
+</script>
+<div class="title">daftar group pemakai</div>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="a.kode_group">Kode Group</option>
+      <option value="a.nama_group">Nama Group</option>
+      <option value="a.keterangan">Keterangan</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<script language="javascript">base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/usergroup/viewdata',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Kode', 'Nama', 'Keterangan', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id',index:'id',key:true, width:50,editable:true, hidden:true},
+			{name:'kode_group',index:'kode_group', width:90},
+			{name:'nama_group',index:'nama_group', width:170},
+			{name:'keterangan',index:'keterangan', width:160},
+			{name:'add_date',index:'add_date', width:120},
+			{name:'add_user',index:'add_user', width:80},
+		],
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Group User",
+		height:600,
+		width:750			
+	});
+	
+	return false;
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/usergroup/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/usergroup/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+load_grid();
+</script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "tpl/headerblank.html" %}
+{% block content %}
+<div class="title">Approval Surat Keluar</div>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+                
+<table width="100%" border="0">  
+  <tr>
+    <td width="9%" nowrap="nowrap">No Surat</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap">{{ surat.no_surat }}
+      <input type="hidden" name="id_surat" id="id_surat" value="{{ surat.id_surat }}" />
+      <input type="hidden" name="no_surat" id="no_surat" value="{{ surat.no_surat }}" />
+      <input type="hidden" name="jenis" id="jenis" value="{{ surat.id_jenissurat }}" />
+      <input type="hidden" name="tanggal" id="tanggal" value="{{ surat.tanggal_buat }}" />
+      <input type="hidden" name="sifat" id="sifat" value="{{ surat.id_sifat }}" />
+      <input type="hidden" name="lampiran" id="lampiran" value="{{ surat.lampiran }}" />
+      <input name="status_keluar" type="hidden" id="status_keluar" value="4" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tanggal Buat Surat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.tanggal_buat }}</td>
+  </tr>
+  
+  <tr>
+    <td nowrap="nowrap">Sifat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.nama_sifat }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Jenis Arsip</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.nama_jenis }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Info Lampiran</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.lampiran }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tanggal Penyelesaian</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="tanggal_klarifikasi" type="text" id="tanggal_klarifikasi" size="10" class="required" value="{{ surat.tanggal_selesai }}" /></td>
+  </tr>
+  
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Catatan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="catatan" id="catatan" cols="70" rows="10">{{ surat.catatan }}</textarea>      </td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Hal</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="perihal" id="perihal" cols="70" rows="10">{{ surat.perihal }}</textarea>      </td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="button" name="button3" id="button3" value="Approve" class="button" onclick="submitform()" />&nbsp;<input type="button" value="batal" /></td>
+  </tr>
+</table>
+</form>
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<script>
+jQuery(window).load(function(){
+	base_url = jQuery("#base_url").val();
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+});
+function submitform()
+{
+	document.form1.submit();
+	window.opener.location='{{ base_url }}index.php/suratkeluar/approvalSurat';
+}
+</script>
+{% endblock %}

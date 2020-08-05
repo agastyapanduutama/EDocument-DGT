@@ -1,0 +1,193 @@
+{% extends "tpl/headerblank.html" %}
+{% block content %}
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="a.judul">Judul</option>
+      <option value="a.deskripsi">Abstrak</option>
+      <option value="b.nama_lengkap">Penulis</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;"><br />
+<br />
+
+*) Double klik pada baris data untuk memproses</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/surat/listtoselect',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','','No Agenda', 'No Surat', 'Tgl Buat', 'Tgl Klarifikasi', 'Asal Surat', 'Lampiran', '', '', '', '', '', '', '', '', '', '', '', '',  '', 'Tujuan','Staff', 'Sifat Surat', 'Add Date', 'Add User'],
+		
+		
+		
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'fk_id',index:'fk_id', width:90, hidden:true},
+			{name:'no_agenda',index:'no_agenda', width:170},
+			{name:'no_surat',index:'no_surat', width:160},
+			{name:'tanggal',index:'tanggal', width:160},
+			{name:'tanggal_klarifikasi',index:'tanggal_klarifikasi', width:160},
+			{name:'asal_surat',index:'asal_surat', width:100},
+			{name:'lampiran',index:'lampiran', width:160},
+			
+			{name:'kode_arsip',index:'kode_arsip', hidden:true},
+			{name:'tunjuk_silang',index:'tunjuk_silang', hidden:true},
+			{name:'jadwal_penyusutan',index:'jadwal_penyusutan',hidden:true},
+			{name:'tempat_penyimpanan',index:'tempat_penyimpanan',hidden:true},
+			{name:'indeks',index:'indeks', hidden:true},
+			{name:'hal',index:'hal', hidden:true},
+			{name:'catatan',index:'catatan', hidden:true},
+			{name:'id_group',index:'id_group', hidden:true},
+			{name:'id_staff',index:'id_staff',hidden:true},
+			{name:'id_sifat',index:'id_sifat',hidden:true},
+			{name:'id_jenissurat',index:'id_jenissurat',hidden:true},
+			{name:'id_aksi',index:'id_aksi', hidden:true},
+			{name:'status_disposisi',index:'status_disposisi',hidden:true},
+			
+			
+			{name:'nama_group',index:'nama_group', width:160},
+			{name:'nama_staff',index:'nama_staff', width:160},
+			{name:'nama_sifat',index:'nama_sifat', width:160},
+			{name:'add_date',index:'nama_status', width:120},
+			{name:'add_user',index:'add_user', width:80},
+		],
+		ondblClickRow: function(rowid) {
+			window.opener.jQuery("#no_surat").val(jQuery("#ListData").getCell(rowid,'no_surat'));
+			window.opener.jQuery("#fkId").val(jQuery("#ListData").getCell(rowid,'fk_id'));
+			window.opener.jQuery("#tanggal").val(jQuery("#ListData").getCell(rowid,'tanggal'));
+			window.opener.jQuery("#asal_surat").val(jQuery("#ListData").getCell(rowid,'asal_surat'));
+			window.opener.jQuery("#sifat").val(jQuery("#ListData").getCell(rowid,'id_sifat'));
+			window.opener.jQuery("#jenis").val(jQuery("#ListData").getCell(rowid,'id_jenissurat'));
+			window.opener.jQuery("#lampiran").val(jQuery("#ListData").getCell(rowid,'lampiran'));
+			window.opener.jQuery("#tanggal_klarifikasi").val(jQuery("#ListData").getCell(rowid,'tanggal_klarifikasi'));
+			window.opener.jQuery("#aksi").val(jQuery("#ListData").getCell(rowid,'id_aksi'));
+			window.opener.jQuery("#group").val(jQuery("#ListData").getCell(rowid,'id_group'));
+			window.opener.jQuery("#id_staff").val(jQuery("#ListData").getCell(rowid,'id_staff'));
+			
+			window.opener.jQuery("#jenis").val(jQuery("#ListData").getCell(rowid,'id_jenissurat'));
+			window.opener.jQuery("#tunjuk_silang").val(jQuery("#ListData").getCell(rowid,'tunjuk_silang'));
+			window.opener.jQuery("#jadwal_penyusutan").val(jQuery("#ListData").getCell(rowid,'jadwal_penyusutan'));
+			window.opener.jQuery("#tempat_penyimpanan").val(jQuery("#ListData").getCell(rowid,'tempat_penyimpanan'));
+			window.opener.jQuery("#indeks").val(jQuery("#ListData").getCell(rowid,'indeks'));
+			window.opener.jQuery("#catatan").val(jQuery("#ListData").getCell(rowid,'catatan'));
+			window.opener.jQuery("#hal").val(jQuery("#ListData").getCell(rowid,'hal'));
+			window.opener.close_pop();
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Masuk",
+		height:320,
+		width:780,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/dok/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+function groupRow()
+{
+	if("{{ usergroup }}" == 0)
+	{
+		if(jQuery("#publik").val()>0)
+			jQuery("#groupRow").hide();
+		else
+			jQuery("#groupRow").show();
+	}
+	else
+		jQuery("#groupRow").hide();
+}
+function expandgroup(publik, group)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		arr = group.split(',');
+		
+		for(y=0; y<arr.length; y++){
+			for(x=1; x<=jQuery("#jnum").val(); x++)
+			{
+				if(jQuery("#idgroup"+x).val() == arr[y])
+				document.getElementById("id_group"+x).checked=true;				
+			}
+		}
+	}
+	else
+	{
+		for(x=1; x<=jQuery("#jnum").val(); x++)
+		{
+			document.getElementById("id_group"+x).checked=false;				
+		}
+		jQuery("#groupRow").hide();
+	}
+		
+}
+function expandgroup2(publik)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			if(jQuery("#idgroup"+x).val() == "{{ usergroup }}") {
+				document.getElementById("id_group"+x).checked=true;	
+			}
+		}
+	}
+	else
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			document.getElementById("id_group"+x).checked=false;				
+			
+		}
+	}
+	jQuery("#groupRow").hide();
+}
+
+load_grid();
+groupRow()
+</script>
+<script>
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

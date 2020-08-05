@@ -1,0 +1,168 @@
+{% extends "tpl/headereletbaru.html" %}
+{% block content %}
+
+<div class="title">Surat Keluar {{ log.usernamajabatan }}</div>
+<div class="simpleTabs">
+    <ul class="simpleTabsNavigation">
+          <li><a href="#">Surat Keluar Kasubag</a></li>
+          <li><a href="#">Surat Keluar Kabag</a></li>
+          <li><a href="#">Surat Keluar Direktur</a></li>
+    </ul>
+    
+    <div class="simpleTabsContent">
+        <table width="1000" border="0" id="ListData"></table>
+        <div id="pager"></div>
+        *) Double klik pada baris data untuk melanjutkan  
+    </div>
+    
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData2"></table>
+        <div id="pager2"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melanjutkan  
+        </div> 
+    </div>
+    
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData3"></table>
+        <div id="pager3"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+</div>
+
+
+
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+
+function load_kasubag(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/suratkeluar/listKasubag/3',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Surat', 'No Agenda', 'Tgl Buat', 'Tgl Selesai', 'Perihal', 'Catatan','Oleh','Nomor Induk','','Status'],
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'no_surat',index:'no_surat', width:90},
+			{name:'no_agenda',index:'no_agenda', width:170, hidden:true},
+			{name:'tanggal_buat',index:'tanggal_buat', width:160},
+			{name:'tanggal_selesai',index:'tanggal_selesai', width:160},
+			{name:'perihal',index:'perihal', width:100},
+			{name:'catatan',index:'lampiran', width:160},
+			{name:'pembuat',index:'nama_aksi', width:160},
+			{name:'noinduk_pembuat',index:'nama_jenis', width:160},
+			{name:'id_keluar',index:'id_keluar', hidden:true},
+			{name:'nama_status',index:'nama_status', width:160},
+			
+		],
+		ondblClickRow: function(rowid) {
+			{% if log.userleveljabatan == 3 %}
+				window.open('{{ base_url }}index.php/suratkeluar/suratLanjut/'+jQuery("#ListData").getCell(rowid,'id_surat')+'/'+jQuery("#ListData").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+			{% else %}
+				window.open('{{ base_url }}index.php/suratkeluar/suratView/'+jQuery("#ListData").getCell(rowid,'id_surat')+'/'+jQuery("#ListData").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+			{% endif %}
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Keluar Untuk {{ log.usernamereal }} ({{ log.usernamajabatan}})",
+		height:320,
+		width:720,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+
+
+function load_kabag(){
+	jQuery("#ListData2").jqGrid({
+		url: '{{ base_url }}index.php/suratkeluar/listKasubag/2',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Surat', 'No Agenda', 'Tgl Buat', 'Tgl Selesai', 'Perihal', 'Catatan','Oleh','Nomor Induk','','Status'],
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'no_surat',index:'no_surat', width:90},
+			{name:'no_agenda',index:'no_agenda', width:170, hidden:true},
+			{name:'tanggal_buat',index:'tanggal_buat', width:160},
+			{name:'tanggal_selesai',index:'tanggal_selesai', width:160},
+			{name:'perihal',index:'perihal', width:100},
+			{name:'catatan',index:'lampiran', width:160},
+			{name:'pembuat',index:'nama_aksi', width:160},
+			{name:'noinduk_pembuat',index:'nama_jenis', width:160},
+			{name:'id_keluar',index:'id_keluar', hidden:true},
+			{name:'nama_status',index:'nama_status', width:160},
+		],
+		ondblClickRow: function(rowid) {
+			{% if log.userleveljabatan == 2 %}
+				window.open('{{ base_url }}index.php/suratkeluar/suratLanjut/'+jQuery("#ListData2").getCell(rowid,'id_surat')+'/'+jQuery("#ListData2").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+			{% else %}
+				window.open('{{ base_url }}index.php/suratkeluar/suratView/'+jQuery("#ListData2").getCell(rowid,'id_surat')+'/'+jQuery("#ListData2").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+			{% endif %}
+			
+		},
+		pager: jQuery('#pager2'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Keluar Untuk Kabag",
+		height:320,
+		width:720,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+function load_direktur(){
+	jQuery("#ListData3").jqGrid({
+		url: '{{ base_url }}index.php/suratkeluar/listKasubag/1',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Surat', 'No Agenda', 'Tgl Buat', 'Tgl Selesai', 'Perihal', 'Catatan','Oleh','Nomor Induk','','Status'],
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'no_surat',index:'no_surat', width:90},
+			{name:'no_agenda',index:'no_agenda', width:170, hidden:true},
+			{name:'tanggal_buat',index:'tanggal_buat', width:160},
+			{name:'tanggal_selesai',index:'tanggal_selesai', width:160},
+			{name:'perihal',index:'perihal', width:100},
+			{name:'catatan',index:'lampiran', width:160},
+			{name:'pembuat',index:'nama_aksi', width:160},
+			{name:'noinduk_pembuat',index:'nama_jenis', width:160},
+			{name:'id_keluar',index:'id_keluar', hidden:true},
+			{name:'nama_status',index:'nama_status', width:160},
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/suratkeluar/suratView/'+jQuery("#ListData3").getCell(rowid,'id_surat')+'/'+jQuery("#ListData3").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+		},
+		pager: jQuery('#pager3'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Keluar Untuk Direktur",
+		height:320,
+		width:720,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+jQuery(window).load(function(){
+	load_kasubag();
+	load_kabag();
+	load_direktur();
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+});
+</script>
+{% endblock %}

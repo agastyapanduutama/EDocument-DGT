@@ -1,0 +1,92 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+
+<div class="title">daftar pemakai</div>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="a.username">User Name</option>
+      <option value="a.nama_lengkap">Nama Lengkap</option>
+      <option value="a.keterangan">Keterangan</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;"><br />
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/pemakai/viewdata',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Username', 'Group User', 'Level', 'Nama Lengkap', 'Status', 'Keterangan', 'Priviledge','id_group','level','status', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id',index:'id',key:true, width:50,editable:true, hidden:true},
+			{name:'username',index:'username', width:90},
+			{name:'nama_group',index:'nama_group', width:170},
+			{name:'nama_level',index:'nama_level', width:160},
+			{name:'nama_lengkap',index:'nama_lengkap', width:160},
+			{name:'nama_status',index:'nama_level', width:160},
+			{name:'keterangan',index:'keterangan', width:160},
+			{name:'priv',index:'priv', width:160},
+			{name:'id_group',index:'id_group', hidden:true},
+			{name:'level',index:'level', hidden:true},
+			{name:'status',index:'status', hidden:true},
+			{name:'add_date',index:'nama_status', width:120},
+			{name:'add_user',index:'add_user', width:80},
+		],
+		/*ondblClickRow: function(rowid) {
+			jQuery("#id").val(jQuery("#ListData").getCell(rowid,'id'));
+			jQuery("#username").val(jQuery("#ListData").getCell(rowid,'username'));
+			jQuery("#id_group").val(jQuery("#ListData").getCell(rowid,'id_group'));
+			jQuery("#level").val(jQuery("#ListData").getCell(rowid,'level'));
+			jQuery("#nama_lengkap").val(jQuery("#ListData").getCell(rowid,'nama_lengkap'));
+			jQuery("#keterangan").val(jQuery("#ListData").getCell(rowid,'keterangan'));
+			jQuery("#status").val(jQuery("#ListData").getCell(rowid,'status'));
+			jQuery("#username").attr("readonly",true);
+		},*/
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Pemakai",
+		height:600,
+		width:900	
+	});
+	
+	return false;
+}
+
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/pemakai/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/pemakai/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+
+load_grid();
+</script>
+{% endblock %}

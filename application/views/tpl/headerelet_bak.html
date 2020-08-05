@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ESDM :: E-Letter</title>
+<link href="{{ base_url }}assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{{ base_url }}assets/css/menuset.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon"  href="{{ base_url }}assets/img/icletter.ico" type="image/x-icon" />
+<script type="text/javascript" src="{{ base_url }}assets/js/jquery1.8.js"></script>
+<script type="text/javascript" src="{{ base_url }}assets/js/accordion.js"></script>
+<script language="javascript">
+jQuery(document).ready(function() {
+	jQuery("#topnews2").hide()
+});
+
+function showtopnews(obj)
+{
+	jQuery("#topnews1").hide();
+	jQuery("#topnews2").hide();
+	jQuery("#"+obj).show();
+}
+</script>
+<script src="{{ base_url }}assets/jqgrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="{{ base_url }}assets/jqgrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+<script src="{{ base_url }}assets/jqgrid/js/jquery.jqGrid.fluid.js" type="text/javascript"></script>
+<script type="text/javascript">
+function $(obj){return document.getElementById(obj);}
+
+ddaccordion.init({
+	headerclass: "expandable", //Shared CSS class name of headers group that are expandable
+	contentclass: "categoryitems", //Shared CSS class name of contents group
+	revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+	mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+	defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content
+	onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
+	animatedefault: false, //Should contents open by default be animated into view?
+	persiststate: true, //persist state of opened contents within browser session?
+	toggleclass: ["", "openheader"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+	togglehtml: ["prefix", "", ""], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+	animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+	oninit:function(headers, expandedindices){ //custom code to run when headers have initalized
+		//do nothing
+	},
+	onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+		//do nothing
+	}
+})
+</script>
+<style type="text/css">
+	.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+	}
+</style>
+
+<link rel="stylesheet" type="text/css" media="screen" href="{{ base_url }}assets/jqgrid/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ base_url }}assets/jqgrid/themes/redmond/ui.jqgrid.css" />
+</head>
+<body>
+<div id="container">
+	<div id="header">
+        <div id="homelink">
+        	<ul>
+            	<li style=" background: url({{ base_url }}assets/img/email.png) no-repeat left top; padding-left:21px; padding-right:10px;"><a href="#">CONTACT ADMIN </a></li>
+                <li style=" background: url({{ base_url }}assets/img/sitemap.png) no-repeat left top; padding-left:21px;"><a href="#">NAVIGATION GUIDE</a> </li>
+            </ul>
+        </div>
+        <div id="esdmlogo">
+        	<img src="{{ base_url }}assets/img/logoesdm.png" id="imglogo" />
+        </div>
+        <div id="lineheader">
+        	<div id="topmenu">home | ganti password | logout</div>
+        </div>
+        <div id="headerdiv">
+        	<img src="{{ base_url }}assets/img/appletter.png" id="appimg" />
+            <div id="announcediv">
+            	<marquee id="announce" direction="up" scrollamount="2">Selamat Datang di Layanan Aplikasi E-Letter. Anda dapat melakukan penyuratan kedinasan secara online, anda juga dapat melakukan disposisi serta penyelesaian proses surat.</marquee>
+            </div>
+        </div>
+	</div>    
+    <div id="content">
+    	<div id="menu"> 
+        	{% if log.userlogged == true %}
+                {% if log.userlevel == 'A' %}
+                    {% include 'tpl/menuadminelet.html' %}
+                {% elseif log.userlevel == 'O'%}
+                    {% include 'tpl/menuoperatorelet.html' %}
+                {% elseif log.userlevel == 'U'%}
+                    {% include 'tpl/menuuserelet.html' %}
+                {% endif %}
+       		{% endif %}
+            
+            <span class="listitle" style="padding-bottom:10px;">10 berita teratas</span>
+        <br />
+		<br />
+		
+        <div id="topnews1" class="topnews">        	
+        	{% for topnews1 in news %}
+            	{% if loop.index <= 5%}
+        			<div class="newstitle10"><a href="{{ base_url }}index.php/contentmaster/newsview/{{ topnews1.getId() }}">{{ topnews1.getJudul() }}</a></div>
+            	{% endif %}
+            {% endfor %}
+            <div class="topnewspageinfo">Top News <strong>1</strong> - <strong>5</strong></div>
+        </div>
+        
+        <div id="topnews2" class="topnews" >
+        	{% for topnews2 in news %}
+            	{% if loop.index >= 6%}
+        			<div class="newstitle10"><a href="{{ base_url }}index.php/contentmaster/newsview/{{ topnews2.getId() }}">{{ topnews2.getJudul() }}</a></div>
+            	{% endif %}
+            {% endfor %}
+            
+            <div class="topnewspageinfo">Top News <strong>6</strong> - <strong>10</strong></div>
+        </div>
+        
+        <div style="text-align:right; margin:0px 5px 0px 0px;" class="dokdesc10"><a href="javascript:void(0);" onclick="showtopnews('topnews1')">[1]</a><a href="javascript:void(0);" onclick="showtopnews('topnews2')">[2]</a></div>
+        </div>
+        
+    	<div id="contenttext">
+        	{% block content %}{% endblock %}
+        </div>
+		<div id="copyright">
+        	Copyright &copy; 2013, <strong>Kementrian Energi dan Sumber Daya Mineral</strong><br />Recomended Browser : Google Chrome
+		</div>
+        <div id="footer">
+        	<img src="{{ base_url }}assets/img/greenlife.png" id="greenlife" />
+            <img  src="{{ base_url }}assets/img/seegreen.png" id="seegreen" />
+        </div>
+        
+	</div>
+   
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+{% extends "tpl/headererep.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate({});	
+});
+</script>
+<div class="title">Pilih Project</div>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td nowrap="nowrap">Cari :</td>
+    <td nowrap="nowrap"><input name="key" type="text" id="key" size="30" /></td>
+    <td nowrap="nowrap">Berdasarkan :</td>
+    <td nowrap="nowrap"><select name="berd" id="berd">
+      <option value="b.nama_perusahaan">Nama Perusahaan</option>
+      <option value="e.nama_jenissurvey">Nama Survey</option>
+    </select>    </td>
+    <td nowrap="nowrap"><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td nowrap="nowrap"><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+
+*) Double klik pada baris data untuk mengisi detail pekerjaan</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/realisasi/listProjectToRealisasi',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Kode Project','Propinsi', 'Kota', '', 'Nama Survey', '', 'Perusahaan', 'Tql Awal', 'Tql Akhir', 'Nama Daerah', 'Luas wilayah', 'Sumber daya', 'Cadangan', '', 'SK Menteri', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id_project',index:'id_project',key:true, width:50,editable:true, hidden:true},
+			{name:'kode_project',index:'kode_project', width:90, hidden:true},
+			{name:'propinsi',index:'propinsi', width:170},
+			{name:'kota_kabupaten',index:'kota_kabupaten'},
+			{name:'id_survey',index:'id_survey', hidden:true},
+			{name:'nama_jenissurvey',index:'nama_jenissurvey', width:160},
+			{name:'id_perusahaan',index:'id_perusahaan', hidden:true},
+			{name:'nama_perusahaan',index:'nama_perusahaan', width:160},
+			{name:'tanggal_awal',index:'tanggal_awal', width:100},
+			{name:'tanggal_akhir',index:'tanggal_akhir', width:160},
+			{name:'nama_daerah',index:'nama_daerah', width:160},
+			{name:'luas_wilayah',index:'luas_wilayah',  hidden:true},
+			{name:'sumber_daya',index:'sumber_daya',  hidden:true},
+			{name:'cadangan',index:'cadangan',  hidden:true},
+			{name:'status',index:'status', hidden:true},
+			{name:'sk_menteri',index:'sk_menteri', hidden:true},
+			{name:'add_date',index:'add_date',  hidden:true},
+			{name:'add_user',index:'add_user',  hidden:true},
+		],
+		ondblClickRow: function(rowid) {
+			window.open("{{ base_url }}index.php/realisasi/formRealisasi/"+ jQuery("#ListData").getCell(rowid,'id_project'), '_blank');
+			//window.location = "{{ base_url }}index.php/planning/formPlanning/" + jQuery("#ListData").getCell(rowid,'id_project')
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Project",
+		height:320,
+		width:750,
+		multiselect : false				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/project/listProjectToDetail/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/dok/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+function groupRow()
+{
+	if("{{ usergroup }}" == 0)
+	{
+		if(jQuery("#publik").val()>0)
+			jQuery("#groupRow").hide();
+		else
+			jQuery("#groupRow").show();
+	}
+	else
+		jQuery("#groupRow").hide();
+}
+function expandgroup(publik, group)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		arr = group.split(',');
+		
+		for(y=0; y<arr.length; y++){
+			for(x=1; x<=jQuery("#jnum").val(); x++)
+			{
+				if(jQuery("#idgroup"+x).val() == arr[y])
+				document.getElementById("id_group"+x).checked=true;				
+			}
+		}
+	}
+	else
+	{
+		for(x=1; x<=jQuery("#jnum").val(); x++)
+		{
+			document.getElementById("id_group"+x).checked=false;				
+		}
+		jQuery("#groupRow").hide();
+	}
+		
+}
+function expandgroup2(publik)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			if(jQuery("#idgroup"+x).val() == "{{ usergroup }}") {
+				document.getElementById("id_group"+x).checked=true;	
+			}
+		}
+	}
+	else
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			document.getElementById("id_group"+x).checked=false;				
+			
+		}
+	}
+	jQuery("#groupRow").hide();
+}
+load_grid();
+groupRow();
+jQuery("#tanggal_mulai").datepicker({ dateFormat: 'yy-mm-dd' });
+jQuery("#tanggal_akhir").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

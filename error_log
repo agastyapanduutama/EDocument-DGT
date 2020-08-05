@@ -1,0 +1,247 @@
+[04-Sep-2013 09:44:26 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[04-Sep-2013 09:44:35 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[04-Sep-2013 09:44:42 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[04-Sep-2013 09:45:13 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[06-Sep-2013 00:53:02 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[06-Sep-2013 00:54:47 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[06-Sep-2013 01:33:31 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[06-Sep-2013 01:40:07 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[06-Sep-2013 02:57:02 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[06-Sep-2013 09:13:28 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[06-Sep-2013 09:14:32 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[06-Sep-2013 09:16:40 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[04-Oct-2013 02:48:59 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[04-Oct-2013 02:49:22 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[04-Oct-2013 02:49:36 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[20-Oct-2013 03:58:47 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[20-Oct-2013 03:58:59 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[20-Oct-2013 03:59:06 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[20-Oct-2013 03:59:17 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[21-Oct-2013 08:52:57 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends another one cannot have a body in "detaildok.html" at line 29.' in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php:361
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(374): Twig_Parser->filterBodyNodes(Object(Twig_Node_Text))
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php(98): Twig_Parser->filterBodyNodes(Object(Twig_Node))
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(486): Twig_Parser->parse(Object(Twig_TokenStream))
+#3 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(536): Twig_Environment->parse(Object(Twig_TokenStream))
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(330): Twig_Environment->compileSource('{% extends "tpl...', 'detaildok.html')
+#5 /home/solusipi/public_html/esdm/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('detaildok.htm in /home/solusipi/public_html/esdm/application/libraries/Twig/Parser.php on line 361
+[22-Oct-2013 05:37:11 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/headerelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/headerelet....')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/headerelet....')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/headerelet....', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/0a/2f/4094387f030ad8afabe891fa2523.php(10): Twig_Environment->loadTemplate('tpl/headerelet....')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(341): __TwigTemplate_0a2f4094387f030ad8afabe891fa2523->__construct(Object(Twig_Environment))
+#5 /home/solu in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:37:14 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/headerelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/headerelet....')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/headerelet....')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/headerelet....', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/0a/2f/4094387f030ad8afabe891fa2523.php(10): Twig_Environment->loadTemplate('tpl/headerelet....')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(341): __TwigTemplate_0a2f4094387f030ad8afabe891fa2523->__construct(Object(Twig_Environment))
+#5 /home/solu in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:37:30 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(211): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusipi/public_h in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:38:51 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(211): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusipi/public_h in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:40:24 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(211): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusipi/public_h in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:40:59 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(211): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusipi/public_h in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:42:57 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "listsurattodispose.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(234): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusi in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:44:36 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(234): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusipi/public_h in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 05:44:43 UTC] PHP Fatal error:  Uncaught exception 'Twig_Error_Loader' with message 'Unable to find template "tpl/menuadminelet.html" (looked into: application/views) in "homelet.html".' in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php:129
+Stack trace:
+#0 /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php(98): Twig_Loader_Filesystem->findTemplate('tpl/menuadminel...')
+#1 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(272): Twig_Loader_Filesystem->getCacheKey('tpl/menuadminel...')
+#2 /home/solusipi/public_html/esdm/application/libraries/Twig/Environment.php(319): Twig_Environment->getTemplateClass('tpl/menuadminel...', NULL)
+#3 /home/solusipi/public_html/esdm/system/cache/twig/de/98/e9e00bd58e0472b4a14572b82ee4.php(234): Twig_Environment->loadTemplate('tpl/menuadminel...')
+#4 /home/solusipi/public_html/esdm/application/libraries/Twig/Template.php(265): __TwigTemplate_de98e9e00bd58e0472b4a14572b82ee4->doDisplay(Array, Array)
+#5 /home/solusipi/public_h in /home/solusipi/public_html/esdm/application/libraries/Twig/Loader/Filesystem.php on line 129
+[22-Oct-2013 08:37:03 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[25-Oct-2013 04:31:21 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[31-Oct-2013 09:33:36 UTC] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/solusipi/public_html/esdm/application/controllers/dok.php on line 407
+[19-Sep-2019 11:02:46 Asia/Krasnoyarsk] PHP Fatal error:  Uncaught exception 'RuntimeException' with message 'Unable to create the cache directory (/home/dianglo3/public_html/ebtke/system/cache/twig/6b/c2).' in /home/dianglo3/public_html/ebtke/application/libraries/Twig/Environment.php:1087
+Stack trace:
+#0 /home/dianglo3/public_html/ebtke/application/libraries/Twig/Environment.php(330): Twig_Environment->writeCacheFile('/home/dianglo3/...', '<?php??/* homee...')
+#1 /home/dianglo3/public_html/ebtke/application/libraries/Twig.php(48): Twig_Environment->loadTemplate('homeerep.html')
+#2 /home/dianglo3/public_html/ebtke/application/controllers/home.php(115): Twig->display('homeerep', Array)
+#3 [internal function]: Home->erep()
+#4 /home/dianglo3/public_html/ebtke/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#5 /home/dianglo3/public_html/ebtke/index.php(202): require_once('/home/dianglo3/...')
+#6 {main}
+  thrown in /home/dianglo3/public_html/ebtke/application/libraries/Twig/Environment.php on line 1087
+[06-Nov-2019 12:28:06 Asia/Krasnoyarsk] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/dianglo3/public_html/ebtke/application/controllers/dok.php on line 407
+[06-Nov-2019 12:32:49 Asia/Krasnoyarsk] PHP Fatal error:  Call to a member function getNamaAlias() on a non-object in /home/dianglo3/public_html/ebtke/application/controllers/dok.php on line 407
+[28-Jan-2020 11:22:07 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[28-Jan-2020 11:22:07 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[28-Jan-2020 11:22:07 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[28-Jan-2020 11:22:08 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[28-Jan-2020 11:22:08 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 10:34:20] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 10:34:20] PHP Parse error:  syntax error, unexpected T_STRING in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 10:34:24] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 10:34:24] PHP Parse error:  syntax error, unexpected T_STRING in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 03:34:51 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:34:54 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 10:35:15] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in /home/dianglo3/public_html/ebtke/system/core/Config.php on line 294
+[21-Feb-2020 10:35:18] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in /home/dianglo3/public_html/ebtke/system/core/Config.php on line 294
+[21-Feb-2020 03:35:36 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:36:07 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php70/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:36:34 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:36:41 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:36:47 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:36:49 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:36:52 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:37:01 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 10:37:25] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php51/usr/share/pear:/opt/alt/php51/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 10:37:28] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php51/usr/share/pear:/opt/alt/php51/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:37:51 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:38:15 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:38:17 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:38:28 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:18 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:21 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:22 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:27 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:28 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:29 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:29 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:30 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:44 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:45 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:47 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:49 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:39:59 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:40:02 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:40:03 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:40:04 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:40:04 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:40:04 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 10:40:26] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php52/usr/share/pear:/opt/alt/php52/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 03:42:00 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[21-Feb-2020 10:42:26] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 10:42:26] PHP Parse error:  syntax error, unexpected T_STRING in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 10:42:30] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[21-Feb-2020 10:42:30] PHP Parse error:  syntax error, unexpected T_STRING in /home/dianglo3/public_html/ebtke/application/controllers/surat.php on line 80
+[27-Feb-2020 22:44:29] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php51/usr/share/pear:/opt/alt/php51/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[27-Feb-2020 22:45:06] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php52/usr/share/pear:/opt/alt/php52/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[27-Feb-2020 15:46:15 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[27-Feb-2020 15:46:43 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37
+[27-Feb-2020 15:47:08 UTC] PHP Fatal error:  require_once(): Failed opening required 'application/helpers/JSON.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/dianglo3/public_html/ebtke/application/helpers/json_helper.php on line 37

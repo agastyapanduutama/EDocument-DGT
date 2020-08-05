@@ -1,0 +1,203 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<script language="javascript" type="text/javascript" src="{{ base_url }}assets/tnymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="{{ base_url }}assets/tnymce/jscripts/general.js"></script>
+<script language="javascript" type="text/javascript">
+	tinyMCE.init({
+		mode : "textareas",
+		//mode : "exact",
+		//elements : "ajaxfilemanager",
+		mode : "textareas",
+		theme : "advanced",
+		plugins : "advimage,advlink,media,contextmenu",
+		
+		document_base_url : "{{ base_url }}",
+		file_browser_callback : "mcFileManager.filebrowserCallBack", 	
+		
+		width: 700,
+		height: 450,
+		theme_advanced_buttons1_add_before : "newdocument,separator",
+		theme_advanced_buttons1_add : "fontselect,fontsizeselect",
+		theme_advanced_buttons2_add : "separator,forecolor,backcolor,liststyle",
+		theme_advanced_buttons2_add_before: "cut,copy,separator,",
+		theme_advanced_buttons3_add_before : "",
+		theme_advanced_buttons3_add : "media",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		extended_valid_elements : "hr[class|width|size|noshade]",
+		file_browser_callback : "ajaxfilemanager",
+		paste_use_dialog : false,
+		theme_advanced_resizing : true,
+		theme_advanced_resize_horizontal : true,
+		apply_source_formatting : true,
+		force_br_newlines : true,
+		force_p_newlines : false,	
+		relative_urls : false
+	});
+
+	function ajaxfilemanager(field_name, url, type, win) {
+		var ajaxfilemanagerurl = "{{ base_url }}assets/tnymce/jscripts/tiny_mce/plugins/ajaxfilemanager/ajaxfilemanager.php";
+		var view = 'detail';
+		switch (type) {
+			case "image":
+			view = 'thumbnail';
+				break;
+			case "media":
+				break;
+			case "flash": 
+				break;
+			case "file":
+				break;
+			default:
+				return false;
+		}
+		tinyMCE.activeEditor.windowManager.open({
+			url: "{{ base_url }}assets/tnymce/jscripts/tiny_mce/plugins/ajaxfilemanager/ajaxfilemanager.php?view=" + view,
+			width: 782,
+			height: 440,
+			inline : "yes",
+			close_previous : "no"
+		},{
+			window : win,
+			input : field_name
+		});
+		
+	}
+
+	jQuery(document).ready(function(){
+		jQuery("#form1").validate({});	
+	});
+</script>
+<div class="title">berita</div>
+<form action="" method="post" name="form1" id="form1">
+<table width="100%" border="0">
+  
+  <tr>
+    <td width="9%" nowrap="nowrap">Judul</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap"><input name="judul" type="text" id="judul" size="75" class="required" />
+      *</td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Deskripsi</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="deskripsi" id="deskripsi" cols="60" rows="8" class="required"></textarea>
+      <input type="hidden" name="id" id="id" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nara Sumber</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap"><input name="penulis" type="text" id="penulis" size="60" /></td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Simpan">
+      <input type="reset" name="button3" id="button3" value="Batal" class="button" onclick="jQuery('#id').val('');" /></td>
+  </tr>
+</table>
+</form>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td>
+    <select name="berd" id="berd">
+      <option value="a.deskripsi">Deskripsi</option>
+      <option value="a.judul">Judul</option>
+      <option value="a.penulis">Penulis</option>
+    </select>
+    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk mengedit<br />
+*) Centang pada baris data untuk menghapus
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/newsmaster/viewdata',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Judul', 'Penulis', '', 'Tgl Publikasi', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id',index:'id',key:true, width:50,editable:true, hidden:true},
+			{name:'judul',index:'judul', width:90},
+			{name:'penulis',index:'penulis', width:170},
+			{name:'deskripsi',index:'deskripsi', hidden:true},
+			{name:'tgl_publikasi',index:'tgl_publikasi', width:160},
+			{name:'add_date',index:'nama_status', width:120},
+			{name:'add_user',index:'add_user', width:80},
+		],
+		ondblClickRow: function(rowid) {
+			jQuery("#id").val(jQuery("#ListData").getCell(rowid,'id'));
+			jQuery("#judul").val(jQuery("#ListData").getCell(rowid,'judul'));
+			jQuery("#penulis").val(jQuery("#ListData").getCell(rowid,'penulis'));
+			tinymce.get('deskripsi').setContent(jQuery("#ListData").getCell(rowid,'deskripsi'));
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Berita",
+		height:320,
+		width:755,
+		multiselect : true				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key = jQuery("#key").val();
+	by = jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/newsmaster/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#by").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/newsmaster/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/newsmaster/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+load_grid();
+</script>
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends "tpl/headererep.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate();
+});
+</script>
+<div class="title">Set Komponen Biaya</div>
+<table width="100%" border="0">
+  <tr>
+    <td width="9%" nowrap="nowrap">Kode Project</td>
+    <td width="1%">:</td>
+    <td width="90%"><input type="text" name="kode_project" readonly="readonly" id="kode_project" value="{{ project.getKodeProject() }}" /> <input type="button" name="button3" id="button3" value="Cari" onclick="popup('{{ base_url }}index.php/detailpekerjaan/searchProject/')" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Survey</td>
+    <td>:</td>
+    <td><input name="nama_survey" type="text" id="nama_survey" readonly="readonly" value="{{ survey.getNamaJenis() }}" style="width:90%;"/></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Aktifitas</td>
+    <td>:</td>
+    <td><input type="text" name="nama_pekerjaan" readonly="readonly" id="nama_pekerjaan" value="{{ pkj.pekerjaan }}" style="width:70%;" />
+      <input type="button" name="button4" id="button4" value="Cari" onclick="popup('{{ base_url }}index.php/setbiaya/searchPekerjaan/'+jQuery('#id_project').val())" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Detail Aktifitas</td>
+    <td>:</td>
+    <td><input type="text" name="detail" readonly="readonly" id="detail" value="{{ det.detail }}" style="width:70%;" />
+      <input type="button" name="button5" id="button5" value="Cari" onclick="popup('{{ base_url }}index.php/setbiaya/searchDetail/'+jQuery('#id_project').val()+'/'+jQuery('#id_pekerjaan').val())" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>*) Tekan tombol &quot;Cari&quot; untuk menentukan paramater pekerjaan</td>
+  </tr>
+</table>
+<fieldset>
+<legend>Isi Detail Pekerjaan</legend>
+<form id="form1" name="form1" method="post" action="">
+<table border="0" cellpadding="0" cellspacing="0" class="formgrid">
+<thead>
+  <tr>
+    <td>No</td>
+    <td>Kelompok Biaya</td>
+    <td>Komponen Biaya</td>
+    <td>Anggaran</td>
+    <td>Keterangan</td>
+    <td>Delete</td>
+    </tr>
+</thead>
+<tbody>
+{% set total = 0 %}
+{% set i = 0 %}
+{% for dbiaya in detbiaya %}
+{% set i = loop.index %}
+  <tr>
+    <td style="padding-right:5px; text-align:right">{{ loop.index }}.<input type="hidden" name="id{{ loop.index }}" id="id{{ loop.index }}" value="{{ loop.index}}" /></td>
+    <td width="250px">
+    <select name="id_komponen{{ loop.index }}" id="id_komponen{{ loop.index }}">
+    	<option value="">- Pilih -</option>
+    	{% for klp in kelompokbiaya %}
+   		<option value="{{ klp.getId() }}"
+        	{% if dbiaya.id_komponen ==  klp.getId() %}
+            selected="selected"
+            {% endif %}
+        >{{ klp.getNamaKomponen() }}</option>
+        {% endfor %}
+    </select>
+    </td>
+    <td width="170"><input type="text" name="nama_biaya{{ loop.index }}" id="nama_biaya{{ loop.index }}" value="{{ dbiaya.nama_biaya }}" class="maxtext" style="width:170px" /></td>
+    <td width="70"><input type="text" name="anggaran{{ loop.index }}" id="anggaran{{ loop.index }}" value="{{ dbiaya.anggaran }}" onkeyup="check_numeric(this)" class="maxtext" style="width:70px" dir="rtl" /></td>
+    <td width="170"><input type="text" name="keterangan{{ loop.index }}" id="keterangan{{ loop.index }}" value="{{ dbiaya.keterangan }}" class="maxtext" style="width:170px" /></td>
+    <td><input type="button" name="button" id="button" value="Delete" class="button" onclick="window.location='{{ base_url }}index.php/setbiaya/deleteDetail/{{ dbiaya.id_project }}/{{ dbiaya.id_pekerjaan }}/{{ dbiaya.id_detail }}/{{ dbiaya.id_biaya }}'" /></td>
+ </tr>
+{% endfor %}   
+
+
+{% set i =  i + 1 %}
+{% set last =  i + 4 %}
+{% for x in i..last  %}
+{% set total = x %}
+  <tr>
+    <td style="padding-right:5px; text-align:right">{{ x }}.<input type="hidden" name="id{{ x }}" id="id{{ x }}" value="{{ x }}" /></td>
+    <td width="250px">
+        <select name="id_komponen{{ x }}" id="id_komponen{{ x }}">
+        	<option value="">- Pilih -</option>
+         {% for klp in kelompokbiaya %}
+   			<option value="{{ klp.getId() }}">{{ klp.getNamaKomponen() }}</option>
+        {% endfor %}
+        </select>
+    </td>
+    <td width="170"><input type="text" name="nama_biaya{{ x }}" id="nama_biaya{{ x }}" class="maxtext" style="width:170px" /></td>
+    <td width="70"><input type="text" name="anggaran{{ x }}" id="anggaran{{ x }}" class="maxtext" style="width:70px" dir="rtl" onkeyup="check_numeric(this)" /></td>
+    <td width="170"><input type="text" name="keterangan{{ x }}" id="keterangan{{ x }}" class="maxtext" style="width:170px" /></td>
+    <td>&nbsp;</td>
+</tr>
+{% endfor %}  
+</tbody>
+</table>
+
+*) Setiap kali anda mengisi lalu menyimpannya, form pengisian akan selalu terdapat 5 baris baru yang kosong, ini bertujuan untuk memudahkan anda jika ingin menambahkan data baru
+<br />
+<br />
+
+<input type="hidden" name="id_project" value="{{ project.getId() }}" id="id_project" />
+<input type="hidden" name="id_pekerjaan" value="{{ pkj.id_pekerjaan }}" id="id_pekerjaan" />
+<input type="hidden" name="id_detail" value="{{ det.id_detail }}" id="id_detail" />
+<input type="hidden" name="total" value="{{ total }}" id="total"  />
+
+<input type="button" name="button2" id="button2" value="Simpan" class="button" onclick="checkForm()" />
+</form>
+
+<script language="javascript">
+	function checkForm()
+	{
+		if(jQuery("#id_project") == "")
+			alert("Anda belum memilih Project terkait");
+		else if(jQuery("#id_pekerjaan") == "")
+			alert("Anda belum memilih Aktifitas terkait");
+		else if(jQuery("#id_detail") == "")
+			alert("Anda belum memilih Detail Aktifitas terkait");
+		else {
+		
+			var total = jQuery("#total").val();
+			var ok = false;
+			for(x = 1; x<= total; x++ )
+			{
+				if (jQuery("#nama_biaya" + x).val() != "")
+					ok = true			
+			}
+			
+			if(ok) {
+				var jump = "Y";
+				var bumper = "Y";
+				var num_jump = 0;
+				var jumped = false;
+				for (z = 1; z <= total; z++)
+				{
+					if (jQuery("#nama_biaya" + z).val() == "") {
+						bumper = "N";
+						jump = "N";
+						num_jump = z;
+					}
+					else
+						bumper = "Y";
+					
+					if (jump != bumper){
+						jumped = true;
+					}
+					
+				}
+				if(jumped)
+					alert("Pengisian harus berurutan dan tidak boleh ada yang terlewati!");
+				else
+					document.form1.submit();
+			} 
+			else
+				alert("Lengkapi pengisian setidaknya 1 data komponen biaya");
+		
+		}
+		
+	}
+	
+	function check_numeric(obj)
+	{
+		var val = obj.value;
+		var vals = "";
+		for(x = 0; x < val.length; x++)
+		{
+			if(val.charAt(x) >= 0 && val.charAt(x) <= 9)
+				vals += val.charAt(x);
+			else if(val.charAt(x) == " ")
+				vals = val.substring(0, x);
+			else 
+				vals = val.substring(0, x);
+		}
+		obj.value = vals.trim();
+		
+	}
+</script>
+</fieldset>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+<div class="arrowlistmenu">
+    <span class="listitle" style="margin:0 0;">Navigasi E-letter</span>
+    <h3 class="menuheader expandable">Transaksi</h3>
+    <ul class="categoryitems">
+    	{% if log.userleveljabatan == 4 %}
+        <li><a href="{{ base_url }}index.php/suratkeluar/form">Surat Keluar</a></li>
+        {% elseif log.userleveljabatan == 3 %}
+        <li><a href="{{ base_url }}index.php/disposisi/listdispo">Disposisi Surat</a></li>
+        <li><a href="{{ base_url }}index.php/suratkeluar/nonStaff">Surat Keluar</a></li>
+        <li><a href="{{ base_url }}index.php/suratkeluar/approvalSurat">Approval Surat Keluar</a></li>
+        {% else %}
+        <li><a href="{{ base_url }}index.php/disposisi/listdispo">Disposisi Surat</a></li>
+        <li><a href="{{ base_url }}index.php/suratkeluar/nonStaff">Surat Keluar</a></li>
+    	{% endif %}
+    </ul>
+       
+    <h3 class="menuheader expandable">Laporan</h3>
+    <ul class="categoryitems">
+    	<li><a href="#">Surat Masuk</a></li>
+        <li><a href="#">Surat Keluar</a></li>
+        <li><a href="#">Penugasan Disposisi</a></li>
+        <li><a href="#">Status Approval</a></li> 
+        <li><a href="#">Status Penyelasaian</a></li>
+    </ul>
+    
+    <h3 class="menuheader expandable">Utilitas</h3>
+    <ul class="categoryitems">
+        <li><a href="{{ base_url }}index.php/home/gantipass">Ganti Password</a></li>
+        <li><a href="{{ base_url }}index.php/home/logout">Logout</a></li>
+    </ul>
+</div>

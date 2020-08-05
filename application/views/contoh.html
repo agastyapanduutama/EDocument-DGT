@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="{{ base_url }}assets/tree/style.min.css">
+
+Based on <a href="https://www.jstree.com/">jsTree</a>.
+<hr />
+<form action="#" method="post" >
+    <div id="jstree">
+    </div>
+    <input type="" name="jsfields" id="myText" value="" />
+
+    <!-- <a href="" onclick="UwU()">aws</a> -->
+
+    <button type="submit" onclick="UwU()">uwu</button>
+</form>
+<p>Selected items:</p>
+<ul id="keluarna">
+</ul>
+
+<script src="{{ base_url }}assets/tree/jquery.min.js"></script>
+<script src="{{ base_url }}assets/tree/jstree.js"></script>
+
+<script>
+    $('#jstree').jstree({
+        'plugins': ['checkbox', 'wholerow'],
+        'core': {
+            'data': [
+                
+                {% for group in groups if group.id_group > 0 %}
+                
+                {% if group.level == 1 %}
+                    {
+                        'id': ' {{ group.id_group }} ',
+                        'parent': '#',
+                        'text': ' {{ group.id_group }} {{ group.nama_group }} - {{ group.level }} '
+                    },
+                {% endif %}
+
+                {% if group.level == 2  %}
+                    {
+                        'id': ' {{ group.id_group }} ',
+                        'parent': ' {{ group.parent }} ',
+                        'text': ' {{ group.nama_group }} - {{ group.level }} '
+                    },
+                {% endif %}
+                
+                {% endfor %}
+                ],
+            'animation': false,
+            //'expand_selected_onload': true,
+            'themes': {
+                'icons': false,
+            }
+        },
+        'search': {
+            'show_only_matches': true,
+            'show_only_matches_children': true
+        }
+    })
+
+
+    $('#jstree').on('changed.jstree', function (e, data) {
+        var objects = data.instance.get_selected(true)
+        var leaves = $.grep(objects, function (o) {
+            return data.instance.is_leaf(o)
+        })
+        var list = $('#keluarna')
+        var listna = [];
+        
+        list.empty()
+        $.each(leaves, function (i, o) {
+            $('<li/>').text(o.text).appendTo(list)
+        })
+
+        var uwu = $("#keluarna").jstree("get_selected").text();
+       
+        var replaced = uwu.split('  ').join(',');
+
+        document.getElementById("myText").value = replaced;
+        console.log(replaced);
+    })
+
+
+</script>

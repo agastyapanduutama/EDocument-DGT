@@ -1,0 +1,116 @@
+{% extends "tpl/headereletbaru.html" %}
+{% block content %}
+
+<div class="title">Approval Surat Keluar </div>
+<div class="simpleTabs">
+    <ul class="simpleTabsNavigation">
+          <li><a href="#">Surat Keluar Belum Di Approve</a></li>
+          <li><a href="#">Surat Keluar Sudah Di Approve</a></li>
+    </ul>
+    
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData3"></table>
+        <div id="pager3"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melakukan approval
+        </div> 
+    </div>
+    
+     <div class="simpleTabsContent">
+        <table border="0" id="ListData4"></table>
+        <div id="ListData4"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+</div>
+
+
+
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+
+
+
+
+
+function load_notapprove(){
+	jQuery("#ListData3").jqGrid({
+		url: '{{ base_url }}index.php/suratkeluar/listToapprove',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Surat', 'No Agenda', 'Tgl Buat', 'Tgl Selesai', 'Perihal', 'Catatan','Oleh','Nomor Induk','','Status'],
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'no_surat',index:'no_surat', width:90},
+			{name:'no_agenda',index:'no_agenda', width:170, hidden:true},
+			{name:'tanggal_buat',index:'tanggal_buat', width:160},
+			{name:'tanggal_selesai',index:'tanggal_selesai', width:160},
+			{name:'perihal',index:'perihal', width:100},
+			{name:'catatan',index:'lampiran', width:160},
+			{name:'pembuat',index:'nama_aksi', width:160},
+			{name:'noinduk_pembuat',index:'nama_jenis', width:160},
+			{name:'id_keluar',index:'id_keluar', hidden:true},
+			{name:'nama_status',index:'nama_status', width:160},
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/suratkeluar/formApprove/'+jQuery("#ListData3").getCell(rowid,'id_surat')+'/'+jQuery("#ListData3").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+		},
+		pager: jQuery('#pager3'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Belum di Approve",
+		height:320,
+		width:720,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+function load_approved(){
+	jQuery("#ListData4").jqGrid({
+		url: '{{ base_url }}index.php/suratkeluar/listToapprove/4',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Surat', 'No Agenda', 'Tgl Buat', 'Tgl Selesai', 'Perihal', 'Catatan','Oleh','Nomor Induk','','Status'],
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'no_surat',index:'no_surat', width:90},
+			{name:'no_agenda',index:'no_agenda', width:170, hidden:true},
+			{name:'tanggal_buat',index:'tanggal_buat', width:160},
+			{name:'tanggal_selesai',index:'tanggal_selesai', width:160},
+			{name:'perihal',index:'perihal', width:100},
+			{name:'catatan',index:'lampiran', width:160},
+			{name:'pembuat',index:'nama_aksi', width:160},
+			{name:'noinduk_pembuat',index:'nama_jenis', width:160},
+			{name:'id_keluar',index:'id_keluar', hidden:true},
+			{name:'nama_status',index:'nama_status', width:160},
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/suratkeluar/suratView/'+jQuery("#ListData4").getCell(rowid,'id_surat')+'/'+jQuery("#ListData4").getCell(rowid,'id_keluar'), '', 'width=1024, height=768');
+		},
+		pager: jQuery('#pager4'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Sudah di Approved",
+		height:320,
+		width:720,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+jQuery(window).load(function(){
+	load_notapprove();
+	load_approved();
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+});
+</script>
+{% endblock %}

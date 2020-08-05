@@ -1,0 +1,10 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<div class="title">{{ detail.getJudul() }}</div>
+{{ detail.getDeskripsi()|raw }}
+<br />
+<br />
+<a href="{{ base_url }}index.php/home/listberita" style="text-decoration:none; color:#666666;">&raquo; Berita Lainnya</a>
+<br /><br />
+{% endblock %}

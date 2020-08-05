@@ -1,0 +1,14 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<div class="title">beranda</div>
+{{ ct.getBeranda()|raw }}
+<div class="top10div">
+    <img src="{{ base_url }}assets/img/top10dok.png" />
+  	<br />		
+    {% for topdok in topdoks %}		
+    <span class="doktitle10"><a href="{{ base_url }}index.php/dok/detailview/{{ topdok.id_dokumen }}">{{ topdok.judul }}</a></span>
+    <div class="dokdesc10">{{ topdok.singkatdesk }}... <a href="{{ base_url }}index.php/dok/detailview/{{ topdok.id_dokumen }}">[detail]</a></div>
+    {% endfor %}
+</div>
+{% endblock %}

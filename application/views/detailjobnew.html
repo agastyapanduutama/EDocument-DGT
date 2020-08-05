@@ -1,0 +1,133 @@
+{% extends "tpl/headererep.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate();
+});
+</script>
+<div class="title">Set Aktifitas / Project</div>
+<table width="100%" border="0">
+  <tr>
+    <td width="9%" nowrap="nowrap">Kode Project</td>
+    <td width="1%">:</td>
+    <td width="90%"><input type="text" name="kode_project" readonly="readonly" id="kode_project" value="{{ project.getKodeProject() }}" /> <input type="button" name="button3" id="button3" value="Cari" onclick="popup('{{ base_url }}index.php/detailproject/searchProject/')" /> 
+      *) Tekan tombol untuk mencari project terkait</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Survey</td>
+    <td>:</td>
+    <td><input name="nama_survey" type="text" id="nama_survey" readonly="readonly" value="{{ survey.getNamaJenis() }}" style="width:90%;"/></td>
+  </tr>
+</table>
+<fieldset>
+<legend>Isi Detail Pekerjaan</legend>
+<form id="form1" name="form1" method="post" action="">
+<table border="0" cellpadding="0" cellspacing="0" class="formgrid">
+<thead>
+  <tr>
+    <td>No</td>
+    <td>Pekerjaan</td>
+    <td>Keterangan</td>
+    <td>Anggaran</td>
+    <td>Delete</td>
+    </tr>
+</thead>
+<tbody>
+{% set total = 0 %}
+{% set i = 0 %}
+{% for pekerjaan in job %}
+{% set i = loop.index %}
+  <tr>
+    <td style="padding-right:5px; text-align:right">{{ loop.index }}.<input type="hidden" name="id{{ loop.index }}" id="id{{ loop.index }}" value="{{ loop.index }}" /></td>
+    <td width="250px"><input type="text" name="pekerjaan{{ loop.index }}" id="pekerjaan{{ loop.index }}" value="{{ pekerjaan.pekerjaan }}" class="maxtext" style="width:250px" /></td>
+    <td width="250px"><input type="text" name="keterangan{{ loop.index }}" id="keterangan{{ loop.index }}" value="{{ pekerjaan.keterangan }}" class="maxtext" style="width:250px" /></td>
+    <td width="100px"><input type="text" name="anggaran{{ loop.index }}" id="anggaran{{ loop.index }}" value="{{ pekerjaan.anggaran }}" class="maxtext" style="width:100px" dir="rtl"/></td>
+    <td><input type="button" name="button" id="button" value="Delete" class="button" onclick="window.location='{{ base_url }}index.php/detailproject/deleteDetail/{{ project.getId() }}/{{ pekerjaan.id_pekerjaan }}'" /></td>
+ </tr>
+{% endfor %}   
+
+
+{% set i =  i + 1 %}
+{% set last =  i + 4 %}
+{% for x in i..last  %}
+{% set total = x %}
+  <tr>
+    <td style="padding-right:5px; text-align:right">{{ x }}.<input type="hidden" name="id{{ x }}" id="id{{ x }}" value="{{ x }}" /></td>
+    <td width="250px"><input type="text" name="pekerjaan{{ x }}" id="pekerjaan{{ x }}" class="maxtext" style="width:250px" /></td>
+    <td width="250px"><input type="text" name="keterangan{{ x }}" id="keterangan{{ x }}" class="maxtext" style="width:250px" /></td>
+    <td width="100px"><input type="text" name="anggaran{{ x }}" id="anggaran{{ x }}" class="maxtext" style="width:100px" dir="rtl"/></td>
+    <td>&nbsp;</td>
+</tr>
+{% endfor %}  
+</tbody>
+</table>
+*) Setiap kali anda mengisi lalu menyimpannya, form pengisian akan selalu terdapat 5 baris baru yang kosong, ini bertujuan untuk memudahkan anda jika ingin menambahkan data baru
+<br />
+<br />
+<input type="hidden" name="id_project" value="{{ project.getId() }}" id="id_project" />
+<input type="hidden" name="total" value="{{ total }}" id="total"  />
+
+<input type="button" name="button2" id="button2" value="Simpan" class="button" onclick="checkForm()" />
+</form>
+
+<script language="javascript">
+	function checkForm()
+	{
+		var total = jQuery("#total").val();
+		var ok = false;
+		for(x = 1; x<= total; x++ )
+		{
+			if (jQuery("#pekerjaan" + x).val() != "")
+				ok = true			
+		}
+		
+		if(ok) {
+			var jump = "Y";
+			var bumper = "Y";
+			var num_jump = 0;
+			var jumped = false;
+			for (z = 1; z <= total; z++)
+			{
+				if (jQuery("#pekerjaan" + z).val() == "") {
+					bumper = "N";
+					jump = "N";
+					num_jump = z;
+				}
+				else
+					bumper = "Y";
+				
+				if (jump != bumper){
+					jumped = true;
+				}
+				
+			}
+			if(jumped)
+				alert("Pengisian harus berurutan dan tidak boleh ada yang terlewati!");
+			else
+				document.form1.submit();
+		} 
+		else
+			alert("Lengkapi pengisian setidaknya 1 data pekerjaan");
+	}
+	
+	function check_numeric(obj)
+	{
+		var val = obj.value;
+		var vals = "";
+		for(x = 0; x < val.length; x++)
+		{
+			if(val.charAt(x) >= 0 && val.charAt(x) <= 9)
+				vals += val.charAt(x);
+			else if(val.charAt(x) == " ")
+				vals = val.substring(0, x);
+			else 
+				vals = val.substring(0, x);
+		}
+		obj.value = vals.trim();
+		
+	}
+</script>
+</fieldset>
+
+{% endblock %}

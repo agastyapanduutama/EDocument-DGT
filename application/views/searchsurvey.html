@@ -1,0 +1,103 @@
+{% extends "tpl/headerblank.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate({});	
+});
+</script>
+<div class="title">Jenis Survey</div>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td nowrap="nowrap">Cari :</td>
+    <td nowrap="nowrap"><input name="key" type="text" id="key" size="28" /></td>
+    <td nowrap="nowrap">Berdasarkan :</td>
+    <td nowrap="nowrap"><select name="berd" id="berd">
+      <option value="kode_jenissurvey">Kode Survey</option>
+      <option value="nama_jenissurvey">Nama Survey</option>
+    </select>    </td>
+    <td nowrap="nowrap"><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td nowrap="nowrap"><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+
+*) Double klik pada baris data untuk memilih</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/jenissurvey/viewdata',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Kode','Nama Jenis', 'Keterangan', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id_jenissurvey',index:'id_jenissurvey',key:true, width:50,editable:true, hidden:true},
+			{name:'kode_jenissurvey',index:'kode_jenissurvey', width:90},
+			{name:'nama_jenissurvey',index:'nama_jenissurvey', width:90},
+			{name:'keterangan',index:'keterangan', width:170},
+			{name:'add_date',index:'nama_status', width:120, hidden:true},
+			{name:'add_user',index:'add_user', width:80, hidden:true},
+		],
+		ondblClickRow: function(rowid) {
+			window.opener.jQuery("#id_survey").val(jQuery("#ListData").getCell(rowid,'id_jenissurvey'));
+			window.opener.jQuery("#nama_survey").val(jQuery("#ListData").getCell(rowid,'nama_jenissurvey'));
+			window.close();
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Jenis Survey",
+		height:320,
+		width:750,
+		multiselect : false				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/jenissurvey/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/jenissurvey/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/jenissurvey/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+load_grid();
+jQuery("#tgl_siup").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

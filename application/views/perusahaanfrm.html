@@ -1,0 +1,187 @@
+{% extends "tpl/headererep.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate({});	
+});
+</script>
+<div class="title">Perusahaan</div>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<table width="100%" border="0">
+  
+  <tr>
+    <td width="9%" nowrap="nowrap">NPWP</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap"><input name="npwp" type="text" id="npwp" size="40" class="required" />
+      *
+      <input type="hidden" name="id" id="id" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Perusahaan</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="nama" type="text" id="nama" size="60" class="required" />
+      *</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Pimpinan</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="pimpinan" type="text" id="pimpinan" size="40" class="required" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">SIUP</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="siup" type="text" id="siup" size="40" class="required" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tgl SIUP</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="tgl_siup" type="text" id="tgl_siup" size="10" class="required" /></td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Alamat</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="alamat" cols="40" rows="5" class="required" id="alamat"></textarea></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Telp</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="telp" type="text" id="telp" size="30" class="required" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Notaris</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="notaris" type="text" id="notaris" size="40" class="required" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Email</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="email" type="text" id="email" size="40" class="required" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Kontak Person</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="kontak_person" type="text" id="kontak_person" size="40" class="required" /></td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Simpan">
+      <input type="reset" name="button3" id="button3" value="Batal" class="button" onclick="jQuery('#id').val('');" /></td>
+  </tr>
+</table>
+</form>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td nowrap="nowrap">Cari :</td>
+    <td nowrap="nowrap"><input name="key" type="text" id="key" size="28" /></td>
+    <td nowrap="nowrap">Berdasarkan :</td>
+    <td nowrap="nowrap"><select name="berd" id="berd">
+      <option value="npwp">NPWP</option>
+      <option value="nama_perusahaan">Nama Perusahaan</option>
+    </select>    </td>
+    <td nowrap="nowrap"><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td nowrap="nowrap"><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk mengedit<br />
+*) Centang pada baris data untuk menghapus
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/perusahaan/viewdata',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','NPWP','Nama Perusahaan', 'Pimpinan', 'SIUP', 'Tgl SIUP', 'Alamat', 'Telp','Notaris','Kontak Person','', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id_perusahaan',index:'id_perusahaan',key:true, width:50,editable:true, hidden:true},
+			{name:'npwp',index:'npwp', width:90},
+			{name:'nama_perusahaan',index:'nama_perusahaan', width:170},
+			{name:'pimpinan',index:'pimpinan', width:160},
+			{name:'siup',index:'siup', width:160},
+			{name:'tgl_siup',index:'tgl_siup', width:160, hidden:true},
+			{name:'alamat_perusahaan',index:'alamat_perusahaan', width:100, hidden:true},
+			{name:'telp_perusahaan',index:'telp_perusahaan', width:160},
+			{name:'notaris',index:'notaris'},
+			{name:'kontak_person',index:'kontak_person', hidden:true},
+			{name:'email',index:'email', hidden:true},
+			{name:'add_date',index:'nama_status', width:120, hidden:true},
+			{name:'add_user',index:'add_user', width:80, hidden:true},
+		],
+		ondblClickRow: function(rowid) {
+			jQuery("#id").val(jQuery("#ListData").getCell(rowid,'id_perusahaan'));
+			jQuery("#npwp").val(jQuery("#ListData").getCell(rowid,'npwp'));
+			jQuery("#pimpinan").val(jQuery("#ListData").getCell(rowid,'pimpinan'));
+			jQuery("#nama").val(jQuery("#ListData").getCell(rowid,'nama_perusahaan'));
+			jQuery("#siup").val(jQuery("#ListData").getCell(rowid,'siup'));
+			jQuery("#tgl_siup").val(jQuery("#ListData").getCell(rowid,'tgl_siup'));
+			jQuery("#alamat").val(jQuery("#ListData").getCell(rowid,'alamat_perusahaan'));
+			jQuery("#telp").val(jQuery("#ListData").getCell(rowid,'telp_perusahaan'));
+			jQuery("#notaris").val(jQuery("#ListData").getCell(rowid,'notaris'));
+			jQuery("#email").val(jQuery("#ListData").getCell(rowid,'email'));
+			jQuery("#kontak_person").val(jQuery("#ListData").getCell(rowid,'kontak_person'));
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Perusahaan",
+		height:320,
+		width:750,
+		multiselect : true				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/perusahaan/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/perusahaan/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/perusahaan/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+load_grid();
+jQuery("#tgl_siup").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "tpl/headererep.html" %}
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate({});	
+});
+</script>
+<div class="title">Laporan Wilayah Pekerjan (Project)</div>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="b.nama_perusahaan">Perusahaa</option>
+      <option value="e.nama_jenissurvey">Jenis Survey</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk mengedit<br />
+*) Centang pada baris data untuk menghapus
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/project/listProject',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Kode Project','Propinsi', 'Kota', '', 'Nama Survey', '', 'Perusahaan', 'Tql Awal', 'Tql Akhir', 'Nama Daerah', 'Luas wilayah', 'Sumber daya', 'Cadangan', '', 'SK Menteri', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id_project',index:'id_project',key:true, width:50,editable:true, hidden:true},
+			{name:'kode_project',index:'kode_project', width:90, hidden:true},
+			{name:'propinsi',index:'propinsi', width:170},
+			{name:'kota_kabupaten',index:'kota_kabupaten'},
+			{name:'id_survey',index:'id_survey', hidden:true},
+			{name:'nama_jenissurvey',index:'nama_jenissurvey', width:160},
+			{name:'id_perusahaan',index:'id_perusahaan', hidden:true},
+			{name:'nama_perusahaan',index:'nama_perusahaan', width:160},
+			{name:'tanggal_awal',index:'tanggal_awal', width:100},
+			{name:'tanggal_akhir',index:'tanggal_akhir', width:160},
+			{name:'nama_daerah',index:'nama_daerah', hidden:true},
+			{name:'luas_wilayah',index:'luas_wilayah', hidden:true},
+			{name:'sumber_daya',index:'sumber_daya', hidden:true},
+			{name:'cadangan',index:'cadangan', hidden:true},
+			{name:'status',index:'status', hidden:true},
+			{name:'sk_menteri',index:'sk_menteri', width:160},
+			{name:'add_date',index:'add_date',hidden:true},
+			{name:'add_user',index:'add_user', hidden:true},
+		],
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Project",
+		height:320,
+		width:750,
+		multiselect : false				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/project/listproject/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/project/listProject'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+
+load_grid();
+</script>
+{% endblock %}

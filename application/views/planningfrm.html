@@ -1,0 +1,456 @@
+{% extends "tpl/headerblank.html" %}
+
+{% block content %}
+
+<style type="text/css">
+.btnx {
+	height:21px;
+	background: #A6A77C;
+	color: #FFFFFF;
+	text-transform:uppercase;
+	font-size:10px;
+	border: outset 1px #745921;
+	padding-left:5px;
+	padding-right:5px;
+	border-radius: 0px;
+	
+	
+}
+</style>
+<div class="title">Set Planning Aktifitas</div>
+<table width="100%" border="0">
+  <tr>
+    <td width="9%" nowrap="nowrap">Kode Project</td>
+    <td width="1%">:</td>
+    <td width="90%">{{ project.kode_project }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Survey</td>
+    <td>:</td>
+    <td>{{ survey.nama_jenissurvey }}</td>
+  </tr>
+</table>
+<fieldset>
+<legend>Isi Detail Planning</legend>
+<form id="form1" name="form1" method="post" action="">
+<table border="0" cellpadding="0" cellspacing="0" class="formproject">
+<thead>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td colspan="13"><div align="center">TRIWULAN I</div></td>
+    <td colspan="13"><div align="center">TRIWULAN II</div></td>
+    <td colspan="13"><div align="center">TRIWULAN III</div></td>
+    <td colspan="17"><div align="center">TRIWULAN IV</div></td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td>Aktifitas</td>
+    <td>Detail Aktifitas</td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+    <td>10</td>
+    <td>11</td>
+    <td>12</td>
+    <td>Output</td>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <td>18</td>
+    <td>19</td>
+    <td>20</td>
+    <td>21</td>
+    <td>22</td>
+    <td>23</td>
+    <td>24</td>
+    <td>Output</td>
+    <td>25</td>
+    <td>26</td>
+    <td>27</td>
+    <td>28</td>
+    <td>29</td>
+    <td>30</td>
+    <td>31</td>
+    <td>32</td>
+    <td>33</td>
+    <td>34</td>
+    <td>35</td>
+    <td>36</td>
+    <td>Output</td>
+    <td>37</td>
+    <td>38</td>
+    <td>39</td>
+    <td>40</td>
+    <td>41</td>
+    <td>42</td>
+    <td>43</td>
+    <td>44</td>
+    <td>45</td>
+    <td>46</td>
+    <td>47</td>
+    <td>48</td>
+    <td>49</td>
+    <td>50</td>
+    <td>51</td>
+    <td>52</td>
+    <td>Output</td>
+    <td>Keterangan</td>
+    </tr>
+</thead>
+<tbody>
+{% set total = 0 %}
+{% set i = 0 %}
+{% for detPekerjaan in detail %}
+{% set i = loop.index %}  
+{% set total = i %}  
+
+    <tr>
+    <td nowrap="nowrap">
+    
+    {% if detPekerjaan.id_job != theJob  %}
+    	<em><strong>{{ detPekerjaan.pekerjaan }}</strong></em>
+        {% set theJob = detPekerjaan.id_job %}
+    {% else %}
+    	&nbsp;
+    {% endif%}
+    <span style="padding-right:5px; text-align:right">
+    <input type="hidden" name="id_pekerjaan{{ i }}" id="id_pekerjaan{{ i}}" value="{{ detPekerjaan.id_job }}" />
+    <input type="hidden" name="id_detail{{ i }}" id="id_detail{{ i}}" value="{{ detPekerjaan.id_det }}" />
+    </span></td>
+    <td nowrap="nowrap"><em>{{ detPekerjaan.detail }}</em></td>
+   	<td id="m_1_{{ i }}"><div class="setweekp">{% if detPekerjaan.m1 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_2_{{ i }}"><div class="setweekp">{% if detPekerjaan.m2 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_3_{{ i }}"><div class="setweekp">{% if detPekerjaan.m3 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_4_{{ i }}"><div class="setweekp">{% if detPekerjaan.m4 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_5_{{ i }}"><div class="setweekp">{% if detPekerjaan.m5 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_6_{{ i }}"><div class="setweekp">{% if detPekerjaan.m6 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_7_{{ i }}"><div class="setweekp">{% if detPekerjaan.m7 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_8_{{ i }}"><div class="setweekp">{% if detPekerjaan.m8 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_9_{{ i }}"><div class="setweekp">{% if detPekerjaan.m9 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_10_{{ i }}"><div class="setweekp">{% if detPekerjaan.m10 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_11_{{ i }}"><div class="setweekp">{% if detPekerjaan.m11 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_12_{{ i }}"><div class="setweekp">{% if detPekerjaan.m12 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="output_1_{{ i }}"><div class="setoutputp">{{ detPekerjaan.output1 }}</div></td>
+    <td id="m_13_{{ i }}"><div class="setweekp">{% if detPekerjaan.m13 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_14_{{ i }}"><div class="setweekp">{% if detPekerjaan.m14 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_15_{{ i }}"><div class="setweekp">{% if detPekerjaan.m15 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_16_{{ i }}"><div class="setweekp">{% if detPekerjaan.m16 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_17_{{ i }}"><div class="setweekp">{% if detPekerjaan.m17 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_18_{{ i }}"><div class="setweekp">{% if detPekerjaan.m18 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_19_{{ i }}"><div class="setweekp">{% if detPekerjaan.m19 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_20_{{ i }}"><div class="setweekp">{% if detPekerjaan.m20 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_21_{{ i }}"><div class="setweekp">{% if detPekerjaan.m21 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_22_{{ i }}"><div class="setweekp">{% if detPekerjaan.m22 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_23_{{ i }}"><div class="setweekp">{% if detPekerjaan.m23 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_24_{{ i }}"><div class="setweekp">{% if detPekerjaan.m24 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="output_2_{{ i }}"><div class="setoutputp">{{ detPekerjaan.output2 }}</div></td>
+    <td id="m_25_{{ i }}"><div class="setweekp">{% if detPekerjaan.m25 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_26_{{ i }}"><div class="setweekp">{% if detPekerjaan.m26 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_27_{{ i }}"><div class="setweekp">{% if detPekerjaan.m27 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_28_{{ i }}"><div class="setweekp">{% if detPekerjaan.m28 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_29_{{ i }}"><div class="setweekp">{% if detPekerjaan.m29 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_30_{{ i }}"><div class="setweekp">{% if detPekerjaan.m30 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_31_{{ i }}"><div class="setweekp">{% if detPekerjaan.m31 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_32_{{ i }}"><div class="setweekp">{% if detPekerjaan.m32 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_33_{{ i }}"><div class="setweekp">{% if detPekerjaan.m33 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_34_{{ i }}"><div class="setweekp">{% if detPekerjaan.m34 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_35_{{ i }}"><div class="setweekp">{% if detPekerjaan.m35 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_36_{{ i }}"><div class="setweekp">{% if detPekerjaan.m36 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="output_3_{{ i }}"><div class="setoutputp">{{ detPekerjaan.output3 }}</div></td>
+    <td id="m_37_{{ i }}"><div class="setweekp">{% if detPekerjaan.m37 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_38_{{ i }}"><div class="setweekp">{% if detPekerjaan.m38 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_39_{{ i }}"><div class="setweekp">{% if detPekerjaan.m39 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_40_{{ i }}"><div class="setweekp">{% if detPekerjaan.m40 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_41_{{ i }}"><div class="setweekp">{% if detPekerjaan.m41 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_42_{{ i }}"><div class="setweekp">{% if detPekerjaan.m42 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_43_{{ i }}"><div class="setweekp">{% if detPekerjaan.m43 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_44_{{ i }}"><div class="setweekp">{% if detPekerjaan.m44 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_45_{{ i }}"><div class="setweekp">{% if detPekerjaan.m45 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_46_{{ i }}"><div class="setweekp">{% if detPekerjaan.m46 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_47_{{ i }}"><div class="setweekp">{% if detPekerjaan.m47 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_48_{{ i }}"><div class="setweekp">{% if detPekerjaan.m48 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_49_{{ i }}"><div class="setweekp">{% if detPekerjaan.m49 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_50_{{ i }}"><div class="setweekp">{% if detPekerjaan.m50 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_51_{{ i }}"><div class="setweekp">{% if detPekerjaan.m51 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="m_52_{{ i }}"><div class="setweekp">{% if detPekerjaan.m52 == 'Y'%} &radic; {% endif %}</div></td>
+    <td id="output_4_{{ i }}"><div class="setoutputp">{{ detPekerjaan.output4 }}</div></td>
+    <td id="keterangan_{{ i }}"><div class="setketp">{{ detPekerjaan.keterangan }}</div></td>
+    </tr>
+{% endfor %}   
+</tbody>
+</table>
+
+
+<input type="hidden" name="id_project" value="{{ project.id_project }}" id="id_project" />
+<input type="hidden" name="id_pekerjaan" value="{{ pkj.id_pekerjaan }}" id="id_pekerjaan" />
+<input type="hidden" name="total" value="{{ total }}" id="total"  />
+
+<input type="button" name="button2" id="button2" value="Simpan" class="button" onclick="window.close()" />
+</form>
+<div class="divMinput" id="inputM">
+<h1>Set Kegiatan</h1>
+  <p>&nbsp;</p>
+  <table border="0" align="center">
+    <tr>
+      <td>Ada Kegiatan</td>
+      <td>:</td>
+      <td><input name="kegiatan" type="checkbox" id="kegiatan" value="Y" /></td>
+    </tr>
+  </table><br />
+
+<input type="button" class="btnx" value="Udate" id="saveweek" onclick="saveMinggu();" /><input type="button" class="btnx" value="Batal" onclick="jQuery('#inputM').hide();" />
+</div>
+
+
+<div class="divMinput" id="inputO">
+<h1>Set Output <span></span></h1>
+  <table border="0" align="center">
+    <tr>
+      <td valign="top">Ouput</td>
+      <td valign="top">:</td>
+      <td><textarea name="txtOutput" cols="80" rows="10" id="txtOuput"></textarea></td>
+    </tr>
+  </table><br />
+
+<input type="button" class="btnx" value="Udate" id="saveweek" onclick="saveOutput();" /><input type="button" class="btnx" value="Batal" onclick="jQuery('#inputO').hide();" />
+</div>
+
+<div class="divMinput" id="inputK">
+<h1>Set Keterangan<span></span></h1>
+  <table border="0" align="center">
+    <tr>
+      <td valign="top">Keterangan</td>
+      <td valign="top">:</td>
+      <td><textarea name="txtKeterangan" cols="80" rows="10" id="txtKeterangan"></textarea></td>
+    </tr>
+  </table><br />
+
+<input type="button" class="btnx" value="Udate" id="saveweek" onclick="saveKeterangan();" /><input type="button" class="btnx" value="Batal" onclick="jQuery('#inputK').hide();" />
+</div>
+
+<script language="javascript">
+
+var Global = new Object();
+Global.id_project = jQuery("#id_project").val();
+Global.id_pekerjaan = "";
+Global.id_detail = "";
+Global.id_week = "";
+Global.MColumn = "";
+Global.OColumn = "";
+Global.KColumn = "";
+Global.Triwulan = "";
+
+jQuery(document).ready(function() {
+	defineMethod();
+});
+
+function setFunc(obj)
+{
+	var arr = obj.split("_");
+	var week = parseFloat(arr[1]);
+	var id = parseFloat(arr[2]);
+	
+	Global.id_detail = jQuery("#id_detail" + id).val();
+	Global.id_pekerjaan = jQuery("#id_pekerjaan" + id).val();
+	Global.id_week = week;
+	
+	jQuery("#inputM").show();
+}
+
+function setFuncO(obj)
+{
+	var arr = obj.split("_");
+	var tri = parseFloat(arr[1]);
+	var id = parseFloat(arr[2]);
+	
+	Global.id_detail = jQuery("#id_detail" + id).val();
+	Global.id_pekerjaan = jQuery("#id_pekerjaan" + id).val();
+	Global.Triwulan = tri;
+	
+	jQuery("#inputO").show();
+}
+
+function setFuncK(obj)
+{
+	var arr = obj.split("_");
+	var id = parseFloat(arr[1]);
+	
+	Global.id_detail = jQuery("#id_detail" + id).val();
+	Global.id_pekerjaan = jQuery("#id_pekerjaan" + id).val();
+	jQuery("#inputK").show();
+}
+
+function defineMethod()
+{
+	var total = parseFloat(jQuery("#total").val());
+	var test = "";
+	var arr = Array();
+	var v = -1;
+	for(c=1; c <= 52; c++)
+	{
+		for(y =1; y <= total; y++)
+		{
+			 document.getElementById("m_"+c+"_"+y).addEventListener("click", function(){
+				setFunc(this.id);
+				Global.MColumn = this.id;
+			},false);
+		}
+	}
+	
+	
+	for(w=1; w<= 4; w++)
+	{
+		for(z =1; z <= total; z++)
+		{
+			 document.getElementById("output_"+w+"_"+z).addEventListener("click", function(){
+				setFuncO(this.id);
+				Global.OColumn = this.id;
+			},false);
+		}
+	}
+	
+	
+	for(t = 1; t <= total; t++)
+	{
+		 document.getElementById("keterangan_"+t).addEventListener("click", function(){
+			setFuncK(this.id);
+			Global.KColumn = this.id;
+		},false);
+	}
+}
+
+
+function saveMinggu()
+{
+	var keg = "";
+	
+	if(document.getElementById("kegiatan").checked == true)
+		keg ="Y";
+	
+	jQuery.post('{{ base_url }}index.php/planning/setWeek',{ 
+		week 		: Global.id_week,
+		val	 		: keg, 
+		id_project	: Global.id_project, 
+		id_pekerjaan: Global.id_pekerjaan, 
+		id_detail	: Global.id_detail, 
+	},
+	function(result){
+		if(keg == "Y")
+			jQuery("#"+Global.MColumn).html("<div class='setweekp'>&radic;<div>");
+		else
+			jQuery("#"+Global.MColumn).html("<div class='setweekp'> <div>");
+			
+		jQuery("#inputM").hide();
+	});
+}
+
+function saveOutput()
+{
+	
+	var outs = jQuery("textarea#txtOuput").val();
+	jQuery.post('{{ base_url }}index.php/planning/setOutput',{ 
+		week 		: Global.Triwulan,
+		val	 		: outs, 
+		id_project	: Global.id_project, 
+		id_pekerjaan: Global.id_pekerjaan, 
+		id_detail	: Global.id_detail, 
+	},
+	function(result){
+			jQuery("#"+Global.OColumn).html("<div class='setoutputp'>"+outs+"<div>");
+		
+		jQuery("#inputO").hide();
+	});
+}
+
+function saveKeterangan()
+{	
+	var outs = jQuery("textarea#txtKeterangan").val();
+	jQuery.post('{{ base_url }}index.php/planning/setKeterangan',{ 
+		val	 		: outs, 
+		id_project	: Global.id_project, 
+		id_pekerjaan: Global.id_pekerjaan, 
+		id_detail	: Global.id_detail, 
+	},
+	function(result){
+			jQuery("#"+Global.KColumn).html("<div class='setketp'>"+outs+"<div>");
+		
+		jQuery("#inputK").hide();
+	});
+}
+
+
+function checkForm()
+{
+	if(jQuery("#id_project") == "")
+		alert("Anda belum memilih Project terkait");
+	else if(jQuery("#id_pekerjaan") == "")
+		alert("Anda belum memilih Pekerjaan terkait");
+	else {
+	
+		var total = jQuery("#total").val();
+		var ok = false;
+		for(x = 1; x<= total; x++ )
+		{
+			if (jQuery("#detail" + x).val() != "")
+				ok = true			
+		}
+		
+		if(ok) {
+			var jump = "Y";
+			var bumper = "Y";
+			var num_jump = 0;
+			var jumped = false;
+			for (z = 1; z <= total; z++)
+			{
+				if (jQuery("#detail" + z).val() == "") {
+					bumper = "N";
+					jump = "N";
+					num_jump = z;
+				}
+				else
+					bumper = "Y";
+				
+				if (jump != bumper){
+					jumped = true;
+				}
+				
+			}
+			if(jumped)
+				alert("Pengisian harus berurutan dan tidak boleh ada yang terlewati!");
+			else
+				document.form1.submit();
+		} 
+		else
+			alert("Lengkapi pengisian setidaknya 1 data pekerjaan");
+	
+	}
+}
+
+function check_numeric(obj)
+{
+	var val = obj.value;
+	var vals = "";
+	for(x = 0; x < val.length; x++)
+	{
+		if(val.charAt(x) >= 0 && val.charAt(x) <= 9)
+			vals += val.charAt(x);
+		else if(val.charAt(x) == " ")
+			vals = val.substring(0, x);
+		else 
+			vals = val.substring(0, x);
+	}
+	obj.value = vals.trim();
+}
+</script>
+</fieldset>
+
+{% endblock %}

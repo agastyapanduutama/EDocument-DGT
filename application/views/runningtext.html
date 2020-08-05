@@ -1,0 +1,25 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate();
+});
+</script>
+<div class="title">running text</div>
+<form action="" method="post" name="form1" id="form1">
+<table width="100%" border="0">
+  <tr>
+    <td width="9%" valign="top">Running Text</td>
+    <td width="1%" valign="top">:</td>
+    <td width="90%"><textarea name="runningtext" id="runningtext" cols="70" rows="3" class="required">{{ content.getRunningText}}</textarea>
+      <input name="id" type="hidden" id="id" value="1" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Simpan"></td>
+  </tr>
+</table>
+</form>
+{% endblock %}

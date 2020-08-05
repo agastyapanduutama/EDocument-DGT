@@ -1,0 +1,147 @@
+{% extends "tpl/headerblank.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate({});	
+});
+</script>
+<div class="title">Pilih Item Detail Aktifitas</div>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+
+*) Double klik pada baris data untuk mengisi detail pekerjaan</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/setbiaya/listDetailToBiaya/{{ id_project }}/{{ id_pekerjaan }}',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','','','Detail Aktifitas', 'Keterangan', 'Add Date', 'Add User'],
+		colModel:[
+			{name:'id_detail',index:'id_detail',key:true, width:50,editable:true, hidden:true},
+			{name:'id_pekerjaan',index:'id_pekerjaan',key:true, width:50,editable:true, hidden:true},
+			{name:'id_project',index:'id_project', width:90, hidden:true},
+			{name:'detail',index:'detail', width:170},
+			{name:'keterangan',index:'keterangan', width:170},
+			{name:'add_date',index:'add_date',  hidden:true},
+			{name:'add_user',index:'add_user',  hidden:true},
+		],
+		ondblClickRow: function(rowid) {
+			window.opener.location = "{{ base_url }}index.php/setbiaya/setKomponenBiaya/{{ id_project }}/{{ id_pekerjaan }}/" + jQuery("#ListData").getCell(rowid,'id_detail');
+			window.close();
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Detail Aktifitas",
+		height:320,
+		width:750,
+		multiselect : false				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/project/listProjectToDetail/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/dok/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+function groupRow()
+{
+	if("{{ usergroup }}" == 0)
+	{
+		if(jQuery("#publik").val()>0)
+			jQuery("#groupRow").hide();
+		else
+			jQuery("#groupRow").show();
+	}
+	else
+		jQuery("#groupRow").hide();
+}
+function expandgroup(publik, group)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		arr = group.split(',');
+		
+		for(y=0; y<arr.length; y++){
+			for(x=1; x<=jQuery("#jnum").val(); x++)
+			{
+				if(jQuery("#idgroup"+x).val() == arr[y])
+				document.getElementById("id_group"+x).checked=true;				
+			}
+		}
+	}
+	else
+	{
+		for(x=1; x<=jQuery("#jnum").val(); x++)
+		{
+			document.getElementById("id_group"+x).checked=false;				
+		}
+		jQuery("#groupRow").hide();
+	}
+		
+}
+function expandgroup2(publik)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			if(jQuery("#idgroup"+x).val() == "{{ usergroup }}") {
+				document.getElementById("id_group"+x).checked=true;	
+			}
+		}
+	}
+	else
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			document.getElementById("id_group"+x).checked=false;				
+			
+		}
+	}
+	jQuery("#groupRow").hide();
+}
+load_grid();
+groupRow();
+jQuery("#tanggal_mulai").datepicker({ dateFormat: 'yy-mm-dd' });
+jQuery("#tanggal_akhir").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends "tpl/headererep.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate();
+});
+</script>
+<div class="title">Jabatan</div>
+<table width="100%" border="0">
+  <tr>
+    <td width="9%" nowrap="nowrap">Kode Project</td>
+    <td width="1%">:</td>
+    <td width="90%">{{ project.getKodeProject() }}</td></tr>
+  <tr>
+    <td nowrap="nowrap">Nama Survey</td>
+    <td>:</td>
+    <td>{{ survey.getNamaJenis() }}</td>
+  </tr>
+</table>
+<fieldset>
+<legend>Isi Detail Pekerjaan</legend>
+<form id="form1" name="form1" method="post" action="">
+  <table border="0">
+    <tr>
+      <td>Pekerjaan :</td>
+      <td><input name="pekerjaan" type="text" id="pekerjaan" size="45" onfocus="detectfocus('pekerjaan')" />
+        *) Pilih Salah Satu</td>
+    </tr>
+    <tr>
+      <td>Detail Pekerjaan:</td>
+      <td><input name="detail" type="text" id="detail" size="45" onfocus="detectfocus('detail')" />
+        *) Pilih Salah Satu</td>
+    </tr>
+    <tr>
+      <td>Komponen Biaya</td>
+      <td><select name="biaya" id="biaya">
+        
+    	{% for by in biaya %}
+        
+        <option value="{{ by.getId() }}">{{ by.getKodeKomponen() }} - {{ by.getNamaKomponen() }}</option>
+        
+        {% endfor %}       
+      
+      </select>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button2" id="button2" value="Simpan" class="button" onclick="search_data()" /></td>
+    </tr>
+  </table>
+  <input type="hidden" name="id_project" value="{{ project.getId() }}" id="id_project" />
+  <input type="hidden" name="id_set" value="{{ detail.id_set }}" id="id_set" />
+</form>
+</fieldset>
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk mengedit<br />
+*) Centang pada baris data untuk menghapus
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/detailproject/listDetail/'+{{ project.getId() }},
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','','Pekerjaan', 'Detail Pekerjaan', '', 'Komponen Biaya'],
+		colModel:[
+			{name:'id_set',index:'id_set',key:true, width:50,editable:true, hidden:true},
+			{name:'id_project',index:'id_project', hidden:true},
+			{name:'header_job',index:'header_job', width:90},
+			{name:'detail_job',index:'detail_job', width:170},
+			{name:'id_komponen',index:'add_date', hidden:true},
+			{name:'nama_komponen',index:'add_user', width:80},
+		],
+		ondblClickRow: function(rowid) {
+			jQuery("#id").val(jQuery("#ListData").getCell(rowid,'id'));
+			jQuery("#kode_tujuan").val(jQuery("#ListData").getCell(rowid,'kode_jabatan'));
+			jQuery("#nama_tujuan").val(jQuery("#ListData").getCell(rowid,'nama_jabatan'));
+			jQuery("#keterangan").val(jQuery("#ListData").getCell(rowid,'keterangan'));
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Detail Pekerjaan",
+		height:320,
+		width:750,
+		multiselect : true				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/jabatan/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/jabatan/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/jabatan/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+load_grid();
+function detectfocus(elm)
+{
+	if(elm == "pekerjaan" && jQuery("#detail").val() == "") {
+		jQuery("#pekerjaan").attr("readonly", false);
+		jQuery("#detail").attr("readonly", true);
+		document.getElementById("detail").style.background = "#999999";
+		document.getElementById("pekerjaan").style.background = "#eeeeee";
+		
+	}
+	else if(elm == "pekerjaan" && jQuery("#detail").val() !="") {
+		jQuery("#pekerjaan").attr("readonly", true);
+		document.getElementById("pekerjaan").style.background = "#999999";
+		document.getElementById("detail").style.background = "#eeeeee";
+		jQuery("#detail").attr("readonly", false);
+		jQuery("#detail").focus()
+	}
+	else if(elm == "detail" && jQuery("#pekerjaan").val() == "") {
+		jQuery("#detail").attr("readonly", false);
+		jQuery("#pekerjaan").attr("readonly", true);
+		document.getElementById("pekerjaan").style.background = "#999999";
+		document.getElementById("detail").style.background = "#eeeeee";
+	}
+	else if(elm == "detail" && jQuery("#pekerjaan").val() != "") {
+		jQuery("#detail").attr("readonly", true);
+		document.getElementById("detail").style.background = "#999999";
+		document.getElementById("pekerjaan").style.background = "#eeeeee";
+		jQuery("#pekerjaan").attr("readonly", false);
+		jQuery("#pekerjaan").focus()
+	}
+		
+}
+</script>
+{% endblock %}

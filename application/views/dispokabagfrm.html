@@ -1,0 +1,114 @@
+{% extends "tpl/headerblank.html" %}
+
+{% block content %}
+
+<div class="title">Detail surat</div>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<table width="100%" border="0">
+  
+  <tr>
+    <td width="9%" nowrap="nowrap">No Surat (Klik Tombol Cari)</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap">{{ surat.no_surat }}      
+      <input type="hidden" name="fkId" id="fkId" /></td>
+  </tr>
+  
+  <tr>
+    <td nowrap="nowrap">Asal Surat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.asal_surat }} </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Sifat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.nama_sifat }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Jenis Arsip</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.nama_jenis }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Info Lampiran</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.lampiran }}</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tanggal Klasifikasi</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.tanggal_klarifikasi }}</td>
+  </tr>
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Tunjuk Silang</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.tunjuk_silang }}</td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Jadwal Penyusutan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.jadwal_penyusutan }}</td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Tempat Penyimpanan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.tempat_penyimpanan }}</td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Indeks</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.indeks }}</td>
+  </tr>
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Catatan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.catatan }}</td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Perihal</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.hal }}</td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+    {% if prev == 'view' %}
+    <input type="button" name="button" id="button" value="Kembali" onclick="backurl()">
+    {% else %}
+    <input type="button" name="button" id="button" value="Disposisi {{ dispofor }}" onclick="dispoform()">
+    {% endif%}
+    <input type="button" name="button" id="button" value="Lihat Scan Surat" onclick="window.open('{{ base_url }}assets/surat/{{ surat.file_surat }}')">
+    </td>
+  </tr>
+</table>
+</form>
+
+<div id="pager"></div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function backurl()
+{
+	history.back();
+}
+
+</script>
+<script>
+	var popup = null;
+	function open_pop(){
+		popup = window.open('{{ base_url }}index.php/surat/listsurat','','height=800px,width=1024px');
+	}
+	function close_pop(){
+		popup.close()
+	}
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+	function dispoform()
+	{
+		window.location="{{ base_url }}index.php/disposisi/form/{{ surat.id_surat }}";
+	}
+	
+</script>
+{% endblock %}

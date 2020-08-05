@@ -1,0 +1,255 @@
+{% extends "tpl/headereletbaru.html" %}
+{% block content %}
+<div class="title">Surat Keluar</div>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<table width="100%" border="0">
+  
+  <tr>
+    <td width="9%" nowrap="nowrap">No Surat</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap"><input name="no_surat" type="text" id="no_surat" size="60" class="required" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tanggal Buat Surat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="tanggal" type="text" id="tanggal" size="10" class="required" /></td>
+  </tr>
+  
+  <tr>
+    <td nowrap="nowrap">Sifat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><select name="sifat" id="sifat">
+    						{% for sft in sifat %}
+                            <option value="{{ sft.getId() }}">{{ sft.getNamaSifat() }}</option>
+                            {% endfor %}>
+    </select>    </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Jenis Arsip</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><select name="jenis" id="jenis">
+      
+    						{% for jns in jenissurat %}
+                            
+      <option value="{{ jns.getId() }}">{{ jns.getNamaJenis() }}</option>
+      
+                            {% endfor %}>
+      </select>    </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Info Lampiran</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><select name="lampiran" id="lampiran">
+      <option value="Ada">Ada</option>
+      <option value="Tidak Ada">Tidak Ada</option>
+      <option value="Lengkap">Lengkap</option>
+      <option value="Tidak Lengkap">Tidak Lengkap</option>
+    </select>
+      <input name="aksi2" type="hidden" id="aksi2" value="0" /></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tanggal Penyelesaian</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="tanggal_klarifikasi" type="text" id="tanggal_klarifikasi" size="10" class="required" /></td>
+  </tr>
+  
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Catatan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="catatan" id="catatan" cols="60" rows="8" class="required"></textarea></td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Hal</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="hal" id="hal" cols="60" rows="8" class="required"></textarea></td>
+  </tr>
+  <tr>
+    <td>File Scan Surat</td>
+    <td>:</td>
+    <td><input type="file" name="filesurat" id="filesurat" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Simpan">
+      <input type="reset" name="button3" id="button3" value="Batal" class="button" onclick="jQuery('#id').val(''); jQuery('#groupRow').hide();" /></td>
+  </tr>
+</table>
+</form>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="a.judul">Judul</option>
+      <option value="a.deskripsi">Abstrak</option>
+      <option value="b.nama_lengkap">Penulis</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk mengedit<br />
+*) Centang pada baris data untuk menghapus
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/suratkeluar/viewdata',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Surat', 'No Agenda', 'Tgl Buat', 'Tgl Selesai', 'Perihal', 'Catatan','Aksi','Jenis', 'Sifat'],
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'no_surat',index:'no_surat', width:90},
+			{name:'no_agenda',index:'no_agenda', width:170, hidden:true},
+			{name:'tanggal_buat',index:'tanggal_buat', width:160},
+			{name:'tanggal_selesai',index:'tanggal_selesai', width:160},
+			{name:'perihal',index:'perihal', width:100},
+			{name:'catatan',index:'lampiran', width:160},
+			{name:'nama_aksi',index:'nama_aksi', hidden:true},
+			{name:'nama_jenis',index:'nama_jenis', width:160},
+			{name:'nama_sifat',index:'nama_sifat', width:160},
+		],
+		ondblClickRow: function(rowid) {
+			jQuery("#id").val(jQuery("#ListData").getCell(rowid,'id_dokumen'));
+			jQuery("#id_kategori").val(jQuery("#ListData").getCell(rowid,'id_kategori'));
+			jQuery("#judul").val(jQuery("#ListData").getCell(rowid,'judul'));
+			jQuery("#deskripsi").val(jQuery("#ListData").getCell(rowid,'deskripsi'));
+			jQuery("#penulis").val(jQuery("#ListData").getCell(rowid,'penulis'));
+			jQuery("#publik").val(jQuery("#ListData").getCell(rowid,'publik'));
+			if("{{ usergroup }}" == 0)
+			{
+				expandgroup(jQuery("#ListData").getCell(rowid,'publik'), jQuery("#ListData").getCell(rowid,'groupdok'));
+			}
+			else
+			{
+			 	expandgroup2(jQuery("#ListData").getCell(rowid,'publik'));
+			}
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Keluar Oleh {{ log.usernamereal }}",
+		height:320,
+		width:780,
+		multiselect : true				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/dok/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+function groupRow()
+{
+	if("{{ usergroup }}" == 0)
+	{
+		if(jQuery("#publik").val()>0)
+			jQuery("#groupRow").hide();
+		else
+			jQuery("#groupRow").show();
+	}
+	else
+		jQuery("#groupRow").hide();
+}
+function expandgroup(publik, group)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		arr = group.split(',');
+		
+		for(y=0; y<arr.length; y++){
+			for(x=1; x<=jQuery("#jnum").val(); x++)
+			{
+				if(jQuery("#idgroup"+x).val() == arr[y])
+				document.getElementById("id_group"+x).checked=true;				
+			}
+		}
+	}
+	else
+	{
+		for(x=1; x<=jQuery("#jnum").val(); x++)
+		{
+			document.getElementById("id_group"+x).checked=false;				
+		}
+		jQuery("#groupRow").hide();
+	}
+		
+}
+function expandgroup2(publik)
+{
+	if(publik == 0)
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			if(jQuery("#idgroup"+x).val() == "{{ usergroup }}") {
+				document.getElementById("id_group"+x).checked=true;	
+			}
+		}
+	}
+	else
+	{
+		jQuery("#groupRow").show();
+		for(x=1; x<=jQuery("#jnum").val(); x++){
+			document.getElementById("id_group"+x).checked=false;				
+			
+		}
+	}
+	jQuery("#groupRow").hide();
+}
+
+load_grid();
+groupRow()
+</script>
+<script>
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

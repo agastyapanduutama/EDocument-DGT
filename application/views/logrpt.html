@@ -1,0 +1,46 @@
+<link href="{{ base_url }}assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{{ base_url }}assets/css/menuset.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{ base_url }}assets/js/jquery1.8.js"></script>
+<script type="text/javascript" src="{{ base_url }}assets/js/jqueryvalidation.js"></script>
+<script type="text/javascript" src="{{ base_url }}assets/js/accordion.js"></script>
+<script src="{{ base_url }}assets/jqgrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="{{ base_url }}assets/jqgrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+<script src="{{ base_url }}assets/jqgrid/js/jquery.jqGrid.fluid.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="{{ base_url }}assets/jqgrid/themes/redmond/jquery-ui-1.7.1.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ base_url }}assets/jqgrid/themes/redmond/ui.jqgrid.css" />
+
+<div class="title">log dokumen terbaca</div>
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div></div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/report/viewlog/{{ dok.id_dokumen }}',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','','','Pembaca','IP Address','Tgl Baca'],
+		colModel:[
+			{name:'id_log',index:'id_log',key:true, width:50,hidden:true},
+			{name:'id_dokumen',index:'id_dokumen', width:90, hidden:true},
+			{name:'id_user',index:'id_user', width:170, hidden:true},
+			{name:'pembaca',index:'pembaca', width:160},
+			{name:'ip_address',index:'ip_address', width:160},
+			{name:'tgl_baca',index:'tgl_baca', width:160},
+		],		
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Log",
+		height:230,
+		width:500	
+	});
+	
+	return false;
+}
+load_grid();
+</script>

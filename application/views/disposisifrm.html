@@ -1,0 +1,161 @@
+{% extends "tpl/headerblank.html" %}
+
+{% block content %}
+
+<div class="title">Disposisi</div>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<table width="95%" border="0" align="center">
+  
+  <tr>
+    <td width="9%" nowrap="nowrap">No Surat</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap">{{ surat.no_surat }}      </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Asal Surat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.asal_surat }} </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Sifat</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.nama_sifat }} </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Jenis Arsip</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.nama_jenis}} </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Info Lampiran</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.lampiran }} </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tanggal Klarifikasi</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.tanggal_klarifikasi }} </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Tunjuk Silang</td>
+    <td valign="top" nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">{{ surat.tunjuk_silang }} </td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Jadwal Penyusutan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.jadwal_penyusutan }} </td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Tempat Penyimpanan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.tempat_penyimpanan }} </td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Indeks</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.indeks }} </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Catatan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.catatan }} </td>
+  </tr>
+  <tr>
+    <td valign="top" nowrap="nowrap">Perihal</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap">{{ surat.hal }} </td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Tanggal Disposisi </td>
+    <td>:</td>
+    <td><input name="tanggal_disposisi" type="text" id="tanggal_disposisi" size="10" class="required" />
+        <input type="hidden" name="id_surat" id="id_surat" value="{{ surat.id_surat }}" /></td>
+  </tr>
+  <tr>
+    <td>Waktu Penyelesaian surat </td>
+    <td>:</td>
+    <td><input name="tanggal_penyelesaian" type="text" id="tanggal_penyelesaian" size="10" class="required" /></td>
+  </tr>
+  <tr>
+    <td>Aksi</td>
+    <td>:</td>
+    <td><select name="aksi" id="aksi">
+      
+     {% for act in aksi %}
+      
+      <option value="{{ act.getId() }}">{{ act.getNamaAksi() }} </option>
+      
+      {% endfor %}
+      
+    
+    </select>    </td>
+  </tr>
+  {% if levelJabatan == 3 %}
+  <tr>
+    <td valign="top">Staff</td>
+    <td valign="top">:</td>
+    <td><ul>
+      {% set id = 0 %}
+      {% for st in staff %}
+      {% set id = loop.index %}
+      <li style="list-style:none">
+            <input type="checkbox" value="{{ st.id_staff }}" id="idstaff{{ id }}" name="idstaff{{ id }}" />
+        {{ id }}. {{ st.nama }}</li>
+      {% endfor %}
+     
+      </ul></td>
+  </tr>
+  {% else %}
+  <tr>
+    <td valign="top">Alamat Aksi</td>
+    <td valign="top">:</td>
+    <td><ul>
+      {% set id = 0 %}
+      {% for grp in groups %}
+      {% set id = loop.index %}
+      <li style="list-style:none">
+            <input type="checkbox" value="{{ grp.getId() }}" id="idgroup{{ id }}" name="idgroup{{ id }}" />
+        {{ id }}. {{ grp.getNamaGroup() }}</li>
+      {% endfor %}
+      </ul></td>
+  </tr>
+  {% endif %}
+   <input type="hidden" name="total" id="total" value="{{ id }}" />
+  <tr>
+    <td valign="top">Keterangan </td>
+    <td valign="top">:</td>
+    <td><textarea name="keterangan" id="keterangan" cols="100" rows="15"></textarea></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Simpan" />
+      <input type="reset" name="button3" id="button3" value="Batal" class="button" onclick="jQuery('#id').val(''); jQuery('#groupRow').hide();" /></td>
+  </tr>
+</table>
+</form>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+</script>
+<script>
+	var popup = null;
+	function open_pop(){
+		popup = window.open('{{ base_url }}index.php/surat/listsurat','','height=800px,width=1024px');
+	}
+	function close_pop(){
+		popup.close()
+	}
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_disposisi").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_penyelesaian").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

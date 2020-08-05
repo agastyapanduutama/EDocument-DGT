@@ -1,0 +1,201 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate({
+	  rules: {
+		pass1: "required",
+		pass2: {
+		  equalTo: "#pass1"
+		}
+	  }
+	});	
+});
+</script>
+<div class="title">pemakai</div>
+<form action="" method="post" name="form1" id="form1">
+<table width="100%" border="0">
+  
+  <tr>
+    <td width="9%" nowrap="nowrap">Group Pemakai</td>
+    <td width="1%" nowrap="nowrap">:</td>
+    <td width="90%" nowrap="nowrap">
+    <select name="id_group" id="id_group">
+    {% for group in groups %}
+    	
+      <option value="{{ group.id_group }}">( {{ group.kode_group }} ) - {{ group.nama_group }}
+      </option>
+    {% endfor %}
+    </select> 
+    *
+    </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Username</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="username" type="text" class="required" id="username" size="30" /> 
+      *</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Katasandi</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="pass1" type="password" class="required" id="pass1" size="20" /> 
+      *</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Kata Sandi (Ulang)</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="pass2" type="password" class="required" id="pass2" size="20" /> 
+      *</td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Tingkatan Pemakai</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><select name="level" id="level">
+      <option value="O">Operator (Baca/Upload File)</option>
+      <option value="U">User (Baca File)</option>
+    </select> 
+      *
+    </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">Nama Lengkap</td>
+    <td nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><input name="nama_lengkap" type="text" class="required" id="nama_lengkap" size="40" /> 
+      *</td>
+  </tr>
+  
+  <tr>
+    <td valign="top" nowrap="nowrap">Keterangan</td>
+    <td valign="top" nowrap="nowrap">:</td>
+    <td nowrap="nowrap"><textarea name="keterangan" id="keterangan" cols="45" rows="5"></textarea>
+      <input type="hidden" name="id" id="id" /></td>
+  </tr>
+  <tr>
+    <td>Status</td>
+    <td>:</td>
+    <td><select name="status" id="status">
+      <option value="1">Aktif</option>
+      <option value="0">Non Aktif</option>
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Simpan">
+      <input type="reset" name="button3" id="button3" value="Batal" class="button" onclick="jQuery('#id').val('');" /></td>
+  </tr>
+</table>
+</form>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="a.username">User Name</option>
+      <option value="a.nama_lengkap">Nama Lengkap</option>
+      <option value="a.keterangan">Keterangan</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk mengedit<br />
+*) Centang pada baris data untuk menghapus
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/pemakai/viewdata',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Username', 'Group User', 'Level', 'Nama Lengkap', 'Status', 'Keterangan', 'Priviledge','id_group','level','status'],
+		colModel:[
+			{name:'id',index:'id',key:true, width:50,editable:true, hidden:true},
+			{name:'username',index:'username', width:90},
+			{name:'nama_group',index:'nama_group', width:170},
+			{name:'nama_level',index:'nama_level', width:160},
+			{name:'nama_lengkap',index:'nama_lengkap', width:160},
+			{name:'nama_status',index:'nama_level', width:160},
+			{name:'keterangan',index:'keterangan', width:160},
+			{name:'priv',index:'priv', width:160},
+			{name:'id_group',index:'id_group', hidden:true},
+			{name:'level',index:'level', hidden:true},
+			{name:'status',index:'status', hidden:true},
+			// {name:'add_date',index:'nama_status', width:120},
+			// {name:'add_user',index:'add_user', width:80},
+		],
+		ondblClickRow: function(rowid) {
+			jQuery("#id").val(jQuery("#ListData").getCell(rowid,'id'));
+			jQuery("#username").val(jQuery("#ListData").getCell(rowid,'username'));
+			jQuery("#id_group").val(jQuery("#ListData").getCell(rowid,'id_group'));
+			jQuery("#level").val(jQuery("#ListData").getCell(rowid,'level'));
+			jQuery("#nama_lengkap").val(jQuery("#ListData").getCell(rowid,'nama_lengkap'));
+			jQuery("#keterangan").val(jQuery("#ListData").getCell(rowid,'keterangan'));
+			jQuery("#status").val(jQuery("#ListData").getCell(rowid,'status'));
+			jQuery("#username").attr("readonly",true);
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Pemakai",
+		height:320,
+		width:750,
+		multiselect : true				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/pemakai/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/pemakai/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function delete_data(data){
+	jQuery.post("{{ base_url }}index.php/pemakai/delete_data",{ id : data},
+	function(output){
+		if(output!="") alert(output);
+		else clear_search();
+	});
+}
+load_grid();
+</script>
+{% endblock %}

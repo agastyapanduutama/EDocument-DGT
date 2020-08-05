@@ -1,0 +1,79 @@
+{% extends "tpl/headerblank.html" %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function(){
+	jQuery("#form1").validate();
+});
+</script>
+<div class="title">Jenis Surat</div>
+<form action="" method="post" name="form1" id="form1">
+</form>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Propinsi :</td>
+    <td>
+    <select name="prop" id="prop">
+    {% for prop in propinsi %}
+	<option value="{{ prop.propinsi_id }}">{{ prop.propinsi }}</option>
+    {% endfor %}
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Filter" class="button" onclick="search_data()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+<div style="padding-top:20px; padding-bottom:20px;">
+<input type="button" name="button4" id="button4" value="Hapus Data" class="button" onclick="hapus_data()" /><br />
+<br />
+
+*) Double klik pada baris data untuk memilih<br />
+</div>
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/project/selectKota',
+		datatype: "json",
+		mtype : "post",
+		
+		colNames:['','Propinsi', 'Kota/Kab'],
+		colModel:[
+			{name:'id',index:'id',key:true, width:50,editable:true, hidden:true},
+			{name:'propinsi',index:'propinsi', width:90},
+			{name:'nama_kota',index:'nama_kota', width:170},
+			
+		],
+		ondblClickRow: function(rowid) {
+			window.opener.jQuery("#id_kota").val(jQuery("#ListData").getCell(rowid,'id'));
+			window.opener.jQuery("#nama_kota").val(jQuery("#ListData").getCell(rowid,'nama_kota'));
+			window.close();
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Kota",
+		height:320,
+		width:750,
+		multiselect : false				
+	});
+	
+	return false;
+}
+
+function search_data(){
+	propinsi=jQuery("#prop").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/project/selectKota/'+propinsi});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+
+load_grid();
+</script>
+{% endblock %}

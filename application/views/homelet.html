@@ -1,0 +1,30 @@
+{% extends "tpl/headereletbaru.html" %}
+{% block content %}
+<div class="title">beranda e-letter</div>
+<div>Aplikasi&nbsp;<em>e-Letter</em>&nbsp;merupakan salah satu aplikasi dalam kelompok Administrasi dan Manajemen pada blok fungsi e-Gov. Aplikasi ini dirancang untuk dapat mengelola administrasi surat menyurat yang ada dalam lembaga.</span><br />
+</div>
+<div>
+<span lang="SV">
+<p>Dengan diimplementasikannya aplikasi ini, diperoleh manfaat sebagai berikut :</p>
+<p>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mendukung kebijakan perkantoran elektronis guna menuju&nbsp;<em>e-Government</em>.</p>
+<ul>
+  <li>Dengan melaksanakan implementasi aplikasi persuratan maka sebagian fungsi perkantoran elektronis sudah terakomodasi. Fungsi-fungsi yang disediakan antara lain :</li>
+  <li>Aplikasi dan sistem berbasis web</li>
+  <li>Penyajian informasi surat secara mudah dan tepat guna</li>
+  <li>Surat elektronis</li>
+  <li>Folder elektronis</li>
+  <li>Disposisi surat dalam lingkungan intranet</li>
+</ul>
+<p>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Efisiensi dan Efektivitas Pekerjaan</p>
+<p>Pekerjaan yang terkait dengan persuaratan dan disposisinya dapat dilakukan secara elektronik dengan melibatkan beberapa orang sesuai dengan aliran kerjanya sehingga sehingga dapat meningkatkan produktivitas kerja</p>
+<br />
+<p>&nbsp;</p>
+<div class="top10div">
+    <img src="{{ base_url }}assets/img/top10news.png" />
+  	<br />		
+    {% for topdok in topdoks %}		
+    <span class="doktitle10"><a href="{{ base_url }}index.php/dok/detailview/{{ topdok.id_dokumen }}">{{ topdok.judul }}</a></span>
+    <div class="dokdesc10">{{ topdok.singkatdesk }}... <a href="{{ base_url }}index.php/dok/detailview/{{ topdok.id_dokumen }}">[detail]</a></div>
+    {% endfor %}
+</div>
+{% endblock %}

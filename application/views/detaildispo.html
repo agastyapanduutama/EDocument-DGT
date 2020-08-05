@@ -1,0 +1,228 @@
+{% extends "tpl/headerblank.html" %}
+{% block content %}
+<div class="title">Detail Disposisi</div>
+
+<div class="simpleTabs">
+    <ul class="simpleTabsNavigation">
+      {% if levelJabatan == 1 %}
+          <li><a href="#">Disposisi Kabag</a></li>
+          <li><a href="#">Disposisi Kasubag</a></li>
+          <li><a href="#">Disposisi Staff</a></li>
+      {% elseif levelJabatan == 2 %}
+          <li><a href="#">Disposisi Kasubag</a></li>
+          <li><a href="#">Disposisi Staff</a></li>
+      {% elseif levelJabatan == 3 %}
+          <li><a href="#">Disposisi Staff</a></li>
+      {% endif %}
+    </ul>
+    
+    {% if levelJabatan == 1 %}
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData"></table>
+        <div id="pager"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div>  
+    </div>
+    
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData2"></table>
+        <div id="pager2"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+    
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData3"></table>
+        <div id="pager3"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+     {% elseif levelJabatan == 2 %}
+     <div class="simpleTabsContent">
+        <table border="0" id="ListData2"></table>
+        <div id="pager2"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+    
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData3"></table>
+        <div id="pager3"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+    {% elseif levelJabatan == 3 %}
+    <div class="simpleTabsContent">
+        <table border="0" id="ListData3"></table>
+        <div id="pager3"></div>
+        <div style="padding-top:20px; padding-bottom:20px;">
+            *) Double klik pada baris data untuk melihat detail surat
+        </div> 
+    </div>
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+var jbt = "{{ levelJabatan }}";
+function loadGridKabag(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/disposisidetail/dispokabag/{{ idSurat }}',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Induk','Nama', 'Group', 'Jabatan', 'Tgl Penyelesaian', 'No Agenda', 'No Surat', 'Asal Surat',''],
+		colModel:[
+			{name:'id_disposisi',index:'id_disposisi',key:true, width:50,editable:true, hidden:true},
+			{name:'no_induk',index:'no_induk', width:90},
+			{name:'nama',index:'nama', width:200},
+			{name:'nama_group',index:'nama_group', width:250},
+			{name:'nama_jabatan',index:'nama_jabatan', width:100},
+			{name:'tanggal_penyelesaian',index:'tanggal_penyelesaian', width:100},
+			{name:'no_agenda',index:'no_agenda', width:160},
+			{name:'no_surat',index:'no_surat', width:160},
+			{name:'asal_surat',index:'asal_surat', width:100},
+			{name:'id_surat',index:'id_surat', hidden:true},
+			
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/disposisi/detailsurat/'+jQuery("#ListData").getCell(rowid,'id_surat')+'/view', 'blank');
+			
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Disposisi Kabag",
+		height:320,
+		width:1024,
+		multiselect : false				
+	});
+	return false;
+}
+function loadGridKasubag()
+{
+	jQuery("#ListData2").jqGrid({
+		url: '{{ base_url }}index.php/disposisidetail/dispokasubag/{{ idSurat }}',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Induk','Nama', 'Group', 'Jabatan', 'Tgl Penyelesaian', 'No Agenda', 'No Surat', 'Asal Surat',''],
+		colModel:[
+			{name:'id_disposisi',index:'id_disposisi',key:true, width:50,editable:true, hidden:true},
+			{name:'no_induk',index:'no_induk', width:90},
+			{name:'nama',index:'nama', width:200},
+			{name:'nama_group',index:'nama_group', width:250},
+			{name:'nama_jabatan',index:'nama_jabatan', width:100},
+			{name:'tanggal_penyelesaian',index:'tanggal_penyelesaian', width:100},
+			{name:'no_agenda',index:'no_agenda', width:160},
+			{name:'no_surat',index:'no_surat', width:160},
+			{name:'asal_surat',index:'asal_surat', width:100},
+			{name:'id_surat',index:'id_surat', hidden:true},
+			
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/disposisi/detailsurat/'+jQuery("#ListData2").getCell(rowid,'id_surat')+'/view', 'blank');
+			
+		},
+		pager: jQuery('#pager2'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Disposisi Kasubag",
+		height:320,
+		width:1024,
+		multiselect : false				
+	});
+	return false;
+}
+
+function loadGridStaff()
+{
+	jQuery("#ListData3").jqGrid({
+		url: '{{ base_url }}index.php/disposisidetail/dispostaff/{{ idSurat }}',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','No Induk','Nama', 'Group', 'Jabatan', 'Tgl Penyelesaian', 'No Agenda', 'No Surat', 'Asal Surat',''],
+		colModel:[
+			{name:'id_disposisi',index:'id_disposisi',key:true, width:50,editable:true, hidden:true},
+			{name:'no_induk',index:'no_induk', width:90},
+			{name:'nama',index:'nama', width:200},
+			{name:'nama_group',index:'nama_group', width:250},
+			{name:'nama_jabatan',index:'nama_jabatan', width:100},
+			{name:'tanggal_penyelesaian',index:'tanggal_penyelesaian', width:100},
+			{name:'no_agenda',index:'no_agenda', width:160},
+			{name:'no_surat',index:'no_surat', width:160},
+			{name:'asal_surat',index:'asal_surat', width:100},
+			{name:'id_surat',index:'id_surat', hidden:true},
+			
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/disposisi/detailsurat/'+jQuery("#ListData3").getCell(rowid,'id_surat')+'/view', 'blank');
+			
+		},
+		pager: jQuery('#pager3'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Disposisi Staff",
+		height:320,
+		width:1024,
+		multiselect : false				
+	});
+	return false;
+}
+
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/finddata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/dok/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+
+
+jQuery(window).load(function(){
+	if(jbt == 1){
+		loadGridKabag();
+		loadGridKasubag();
+		loadGridStaff();
+	}
+	else if(jbt == 2)
+	{
+	
+		loadGridKasubag();
+		loadGridStaff();
+	}
+	else if(jbt == 3)
+	{
+		loadGridStaff();
+	}
+	loadGridStaff();
+});
+
+</script>
+<script>
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

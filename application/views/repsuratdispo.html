@@ -1,0 +1,95 @@
+{% extends "tpl/headereletbaru.html" %}
+
+{% block content %}
+
+<div class="title">Laporan Surat Disposisi Direktur</div>
+<fieldset>
+<legend>Pencarian</legend>
+<table border="0">
+  <tr>
+    <td>Cari :</td>
+    <td><input name="key" type="text" id="key" size="30" /></td>
+    <td>Berdasarkan :</td>
+    <td><select name="berd" id="berd">
+      <option value="a.no_agenda">No Agenda</option>
+      <option value="a.deskripsi">No Surat</option>
+    </select>    </td>
+    <td><input type="button" name="button2" id="button2" value="Cari" class="button" onclick="search_data()" /></td>
+    <td><input type="button" name="button4" id="button4" value="Bersihkan" class="button" onclick="clear_search()" /></td>
+  </tr>
+</table>
+</fieldset>
+
+<table width="1000" border="0" id="ListData"></table>
+<div id="pager"></div>
+*) Double klik pada baris untuk melihat detail disposisi
+<script language="javascript">
+base_url=jQuery("#base_url").val();
+function load_grid(){
+	jQuery("#ListData").jqGrid({
+		url: '{{ base_url }}index.php/laporansurat/viewdispo',
+		datatype: "json",
+		mtype : "post",
+		colNames:['','','No Agenda', 'No Surat', 'Tgl Buat', 'Tgl Klarifikasi', 'Asal Surat', 'Lampiran'],
+		
+		colModel:[
+			{name:'id_surat',index:'id_surat',key:true, width:50,editable:true, hidden:true},
+			{name:'fk_id',index:'fk_id', width:90, hidden:true},
+			{name:'no_agenda',index:'no_agenda', width:170},
+			{name:'no_surat',index:'no_surat', width:160},
+			{name:'tanggal',index:'tanggal', width:160},
+			{name:'tanggal_klarifikasi',index:'tanggal_klarifikasi', width:160},
+			{name:'asal_surat',index:'asal_surat', width:100},
+			{name:'lampiran',index:'lampiran', width:160},
+			
+		],
+		ondblClickRow: function(rowid) {
+			window.open('{{ base_url }}index.php/laporansurat/repDispo/'+jQuery("#ListData").getCell(rowid,'id_surat'),'blank')
+		},
+		pager: jQuery('#pager'),
+		rowNum:20,
+		rowList:[0,2,5],
+		viewrecords: true,
+		sortorder: "desc",
+		caption: "Daftar Surat Yang Telah Disposisi Oleh Direktur",
+		height:320,
+		width:780,
+		multiselect : false				
+	});
+	
+	return false;
+}
+function hapus_data(){
+	data = jQuery("#ListData").jqGrid('getGridParam','selarrrow');
+	if(data==""){
+		alert("Tentukan dulu data yang akan di hapus dengan mencentang");
+	}
+	else{
+		if(confirm("Anda yakin?"))
+			delete_data(data);
+		else
+			return false
+	}
+}
+function search_data(){
+	key=jQuery("#key").val();
+	by=jQuery("#berd").val();
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/surat/viewdata/'+by+'/'+key});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+function clear_search(){
+	jQuery("#key").val('');
+	jQuery("#berd").val('');
+	
+	jQuery("#ListData").setGridParam({url:'{{ base_url }}index.php/surat/viewdata'});
+	jQuery("#ListData").trigger("reloadGrid");	
+}
+load_grid();
+groupRow()
+</script>
+<script>
+	jQuery("#tanggal").datepicker({ dateFormat: 'yy-mm-dd' });
+	jQuery("#tanggal_klarifikasi").datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<div class="title">list dokumen Pribadi {{ gr.getNamaGroup() }}</div>
+<div class="top10div">
+    <br />		
+    {% for topdok in hasil %}		
+    <span class="doktitle10"><a href="{{ base_url }}index.php/dok/detailview/{{ topdok.id_dokumen }}">{{ topdok.judul }}</a></span>
+    <div class="dokdesc10">{{ topdok.singkatdesk }}... <a href="{{ base_url }}index.php/dok/detailview/{{ topdok.id_dokumen }}">[detail]</a></div>
+    {% endfor %}
+</div>
+{% endblock %}

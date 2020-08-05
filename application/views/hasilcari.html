@@ -1,0 +1,45 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<span class="title">hasil pencarian</span><br />
+<br /><br />
+  <table width="281" border="0">
+    <tr>
+      <td width="147">Kata Kunci</td>
+      <td width="10">:</td>
+      <td width="115">{{ keyword }}</td>
+    </tr>
+    <tr>
+      <td>Berdasarkan</td>
+      <td>:</td>
+      <td style="text-transform:capitalize;">{{ cariberd }} </td>
+    </tr>
+    <tr>
+      <td>Urut Berdasarkan</td>
+      <td>:</td>
+      <td style="text-transform:capitalize;">{{ urutberd }} </td>
+    </tr>
+    <tr>
+      <td>Sortir</td>
+      <td>:</td>
+      <td style="text-transform:capitalize;">{{ sortberd }} </td>
+    </tr>
+    <tr>
+      <td>Jumlah Hasil Pencarian</td>
+      <td>:</td>
+      <td>{{ jumlah }} Dokumen</td>
+    </tr>
+  </table>
+  <br />
+  <br />
+{% for data in hasil %}
+<span class="doktitle10"><a href="{{ base_url }}index.php/dok/detailview/{{ data.id_dokumen }}">{{ data.judul }}</a></span><br />
+<span style="font-size:12px; padding-left:25px; color:#666666; "><i>Kategori : {{ data.nama_kategori }}</i></span>
+<div class="dokdesc10" style="padding-top:10px;">{{ data.singkatdesk }}...<br />
+<a href="{{ base_url }}index.php/dok/detailview/{{ data.id_dokumen }}">[Detail] </a></div>
+{% endfor %}
+<div align="center">{{ pagination|raw }}</div>
+<br />
+<br />
+
+{% endblock %}

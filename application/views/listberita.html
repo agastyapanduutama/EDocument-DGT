@@ -1,0 +1,17 @@
+{% extends "tpl/headeredoc.html" %}
+
+{% block content %}
+<div class="title">list berita</div>
+<div class="top10div">
+    <br />		
+    {% for topdok in hasil %}		
+    <span class="doktitle10"><a href="{{ base_url }}index.php/contentmaster/newsview/{{ topdok.id_news }}">{{ topdok.judul }}</a></span>
+    <br />
+    <span style="color:#999999; padding-left:10px;"><em>Tgl Publikasi : {{ topdok.tgl_publikasi }}</em></span>
+    <br /><span style="color:#999999; padding-left:10px;"><em>Narasumber : {{ topdok.penulis }}</em></span>
+    <br />
+    <br />
+
+{% endfor %}
+</div>
+{% endblock %}
